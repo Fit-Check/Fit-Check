@@ -5,18 +5,18 @@ import { useState, useEffect } from 'react';
 
 function Fitcheck() {
   const [topsArr, setTopsArray] = useState([
-    'blue shirt',
-    'green sweater',
-    'white jacket',
-    'red hoodie',
-    'denim jacket',
+    // 'blue shirt',
+    // 'green sweater',
+    // 'white jacket',
+    // 'red hoodie',
+    // 'denim jacket',
   ]);
   const [bottomsArr, setBottomsArray] = useState([
-    'blue jeans',
-    'sweats pants',
-    'cargo pants',
-    'black jeans',
-    'denim shorts',
+    // 'blue jeans',
+    // 'sweats pants',
+    // 'cargo pants',
+    // 'black jeans',
+    // 'denim shorts',
   ]);
 
   const [currTop, chooseTop] = useState('');
@@ -66,7 +66,7 @@ function Fitcheck() {
   }
 
   return (
-    <div>
+    <div id='fitcheck'>
       <h2>What is the weather like today?</h2>
       <form>
         <label></label>
