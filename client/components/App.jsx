@@ -25,7 +25,7 @@ function App() {
             <div>
               <div>
                 <Link to='/'>
-                  <button id='back'>Back</button>
+                  <button id='back'>Add More Outfits</button>
                 </Link>
               </div>
               <Fitcheck />
