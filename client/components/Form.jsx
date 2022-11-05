@@ -2,15 +2,31 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Form() {
   const [name, setName] = useState('');
   const [weather, setWeather] = useState('');
   const [clothingType, setType] = useState('');
+  const [user, setUser] = useState('');
 
   function onSubmit() {
     // send post request to server containing state
     console.log(name, clothingType, weather);
+    axios
+      .post('/', {
+        // req.body.name/weather
+        // user: user,
+        name: name, // name of clothing as string
+        weather: weather, // Sunny, Rainy, Cold, Hot
+        clothingType: clothingType, // 'top' or 'bottom'
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (

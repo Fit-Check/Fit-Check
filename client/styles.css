@@ -1,0 +1,20 @@
+body {
+  background-color: lightblue;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 25%));
+}
+
+#clothingCard {
+  border: 1px solid black;
+  border-radius: 20px;
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  margin: 20px;
+}
+
+.wardrobeBox {
+  text-align: center;
+}
