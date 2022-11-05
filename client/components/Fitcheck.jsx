@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-// import './stylesheets/styles.css';
 
-
-function App() {
-  return (
-    <div>REACT
-          </div>
-  );
+function Fitcheck() {
+  return <p>Hi</p>;
 }
 
-//check
-
-export default App;
+export default Fitcheck;
