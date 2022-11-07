@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Clothe = ({ clothing }) => {
-  const { name, style } = clothing;
+  const { name, type } = clothing; //<p><strong>Style:</strong> {style}</p>
   return (
     <div id='clothingCard'>
       <p><strong>Name:</strong> {name}</p>
-      <p><strong>Style:</strong> {style}</p>
+      <p><strong>Type:</strong> {type}</p>
     </div>
   );
 };

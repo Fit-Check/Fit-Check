@@ -6,46 +6,28 @@ import axios from 'axios';
 import Clothe from './Clothe.jsx';
 
 function Wardrobe() {
-  const [wardrobe, setWardrobe] = useState([
-    { name: 't-shirt', style: 'cold' },
-    { name: 'grey sweater', style: 'chill' },
-    { name: 't-shirt', style: 'cold' },
-    { name: 'grey sweater', style: 'chill' },
-    { name: 'grey sweater', style: 'chill' },
-    { name: 't-shirt', style: 'cold' },
-    { name: 'grey sweater', style: 'chill' },
-    { name: 't-shirt', style: 'cold' },
-    { name: 'grey sweater', style: 'chill' },
-    { name: 't-shirt', style: 'cold' },
-    { name: 'grey sweater', style: 'chill' },
-    { name: 't-shirt', style: 'cold' },
-  ]);
+  const [wardrobe, setWardrobe] = useState([]);
   const [size, setSize] = useState(0);
-
-  // [clothing1, clothing2]
-  // response {
-  //     name: asdf,
-  //     type:
-
-  // }
-
   // on mount (useEffect) send get request to server to obtain all wardrobe data
 
-  //   useEffect(() => {
-
-  //     function fetchData() {
-  //         fetch("/api/")
-  //         .then((data) => data.json())
-  //         .then((result) => setWardrobe(result));
-  //     }
-  //     fetchData();
-
-  // }, [size]) // not sure on this
+  useEffect(() => {
+    function fetchData() {
+      fetch('/clothes/1')
+        .then((data) => data.json())
+        .then((result) => {
+          // console.log(result)
+          setWardrobe([...result.top, ...result.bottom])})
+        .catch((err) => {
+          console.log('error after fetch', err);
+        });
+    }
+    fetchData();
+  }, []); // not sure on this
 
   // loop through wardrobe state array
   const clothingArr = [];
   for (let i = 0; i < wardrobe.length; i++) {
-    clothingArr.push(<Clothe clothing={wardrobe[i]}></Clothe>);
+    clothingArr.push(<Clothe clothing={wardrobe[i]} key={i}></Clothe>);
   }
   return (
     <div className='wardrobeBox'>

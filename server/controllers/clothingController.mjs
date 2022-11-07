@@ -70,6 +70,8 @@ clothingController.saveNewClothes = async (req, res, next) => {
   try {
     const {userID} = req.params;
     const {name, weather, clothingType } = req.body;
+    console.log(req.body.name)
+    console.log(name, weather, clothingType)
     if (!userID) {
       return next({
         log: 'Error caught in saveNewClothes middleware',

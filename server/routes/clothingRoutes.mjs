@@ -14,7 +14,7 @@ router.get('/:weather/:userID',clothingController.getClothesForWeather, (req, re
 });
 
 // save user's new clothes
-router.post('/:userID',clothingController.saveNewClothes, (req, res) => {
+router.post('/:userID', clothingController.saveNewClothes, (req, res) => {
   return res.status(200).json(res.locals.savedClothe);
 });
 
