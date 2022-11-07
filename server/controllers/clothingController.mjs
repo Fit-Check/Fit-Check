@@ -1,4 +1,8 @@
-import {getAllClothes, getWeatherClothes, saveNewClothes} from '../queries/clothingQueries.mjs';
+import {
+  getAllClothes,
+  getWeatherClothes,
+  saveNewClothes,
+} from '../queries/clothingQueries.mjs';
 
 const clothingController = {};
 
@@ -6,10 +10,10 @@ const clothingController = {};
 ///:userID
 clothingController.getAllClothes = async (req, res, next) => {
   console.log('Get all clothes middleware');
-    
+
   const { userID } = req.params;
   try {
-    if(!userID) {
+    if (!userID) {
       return next({
         log: 'Error caught in getAllClothes middleware',
         status: 400,
@@ -28,15 +32,14 @@ clothingController.getAllClothes = async (req, res, next) => {
       message: { err: 'Error occurred sending GET request to the database.' },
     });
   }
-
 };
 
 // get specific cloth
 ///:weather/:userID
-clothingController.getClothesForWeather  = async (req, res, next) => {
-  try{
+clothingController.getClothesForWeather = async (req, res, next) => {
+  try {
     //check if weather and userID params are available
-    const {userID, weather } = req.params;
+    const { userID, weather } = req.params;
     //if not available, invoke error handler
     if (!userID || !weather) {
       return next({
@@ -47,11 +50,11 @@ clothingController.getClothesForWeather  = async (req, res, next) => {
     }
     // if available, make query to database with those info
     const clothes = await getWeatherClothes([userID, weather]);
-    // save to locals 
+    // save to locals
     res.locals.weatherClothes = clothes;
     // return next
     return next();
-  }catch(error) {
+  } catch (error) {
     console.log(error, 'error in getWeatherClothes under controllers');
     //invoke global error handler
     return next({
@@ -68,18 +71,17 @@ clothingController.saveNewClothes = async (req, res, next) => {
   // if not, invoke global error handler
   // else save new clothes
   try {
-    const {userID} = req.params;
-    const {name, weather, clothingType } = req.body;
-    console.log(req.body.name)
-    console.log(name, weather, clothingType)
+    const { userID } = req.params;
+    const { name, weather, clothingType } = req.body;
+    console.log(req.body.name);
+    console.log(name, weather, clothingType);
     if (!userID) {
       return next({
         log: 'Error caught in saveNewClothes middleware',
         status: 400,
         message: { err: 'Params not found on request url.' },
       });
-    }
-    else if (!name || !weather || !clothingType) {
+    } else if (!name || !weather || !clothingType) {
       return next({
         log: 'Error caught in saveNewClothes middleware',
         status: 400,
@@ -87,7 +89,7 @@ clothingController.saveNewClothes = async (req, res, next) => {
       });
     }
     const clothe = await saveNewClothes([userID, name, weather, clothingType]);
-    // save to locals 
+    // save to locals
     res.locals.savedClothe = clothe.rows;
     // return next
     return next();

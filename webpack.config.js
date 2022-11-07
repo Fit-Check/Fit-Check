@@ -2,18 +2,17 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-
   mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
     new HTMLWebpackPlugin({
       title: 'Development',
-      template: './index.html'
-    })
+      template: './index.html',
+    }),
   ],
   module: {
     rules: [
@@ -23,13 +22,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       {
-        test:/\.s?css/,
-        use: ['style-loader', 'css-loader']
+        test: /\.s?css/,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -38,16 +37,16 @@ module.exports = {
             loader: 'file-loader',
           },
         ],
-      }
-    ]
+      },
+    ],
   },
   devServer: {
     static: {
       publicPath: '/dist',
-      directory: path.resolve(__dirname, 'dist')
+      directory: path.resolve(__dirname, 'dist'),
     },
     proxy: {
       '/clothes': 'http://localhost:3000',
-    }
-  }
+    },
+  },
 };
