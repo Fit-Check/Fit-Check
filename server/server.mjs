@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'path';
 import clothingRouter from './routes/clothingRoutes.mjs';
+import authRouter from './routes/authRoutes.mjs';
+import auth from './middleware/auth.mjs';
 import { fileURLToPath } from 'url';
 // The fileURLToPath method returns the fully-resolved, platform-specific Node.js file path.
 const __filename = fileURLToPath(import.meta.url);
@@ -12,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/clothes', clothingRouter);
-
+app.use('/', authRouter);
+app.use('/clothes', auth, clothingRouter);
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
