@@ -5,24 +5,33 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Clothe from './Clothe.jsx';
 
-function Wardrobe() {
+const Wardrobe = ({ userId, setUserId, token, setToken }) => {
   const [wardrobe, setWardrobe] = useState([]);
   const [size, setSize] = useState(0);
   // on mount (useEffect) send get request to server to obtain all wardrobe data
 
   useEffect(() => {
     function fetchData() {
-      fetch('/clothes/1')
+      fetch(`/clothes/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }) //${id}
         .then((data) => data.json())
         .then((result) => {
-          console.log('Result from get all clothes fetch:', result)
-          setWardrobe([...result.top, ...result.bottom])})
+
+          // console.log(result)
+          setWardrobe([...result.top, ...result.bottom]);
+        })
+
         .catch((err) => {
           console.log('error after fetch', err);
         });
     }
     fetchData();
   }, []); // not sure on this
+
+  // `Bearer ${token string}`
 
   // loop through wardrobe state array
   const clothingArr = [];
@@ -35,6 +44,6 @@ function Wardrobe() {
       <div className='grid'>{clothingArr}</div>
     </div>
   );
-}
+};
 
 export default Wardrobe;

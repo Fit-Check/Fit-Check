@@ -126,3 +126,4 @@ clothingController.saveNewClothes = async (req, res, next) => {
 };
 
 export default clothingController;
+

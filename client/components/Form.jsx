@@ -4,26 +4,27 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function Form() {
+const Form = ({ userId, setUserId, token, setToken }) => {
   const [name, setName] = useState('');
   const [weather, setWeather] = useState('');
   const [clothingType, setType] = useState('');
-    // const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
 
   function onSubmit() {
     // send post request to server containing state
     if (name && weather && clothingType) {
       console.log(name, clothingType, weather);
-      fetch('/clothes/' + '1', {
+      fetch(`/clothes/${userId}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           name, // name of clothing as string
           weather, // Sunny, Rainy, Cold, Hot
-          clothingType // 'top' or 'bottom'
-        })
+          clothingType, // 'top' or 'bottom'
+        }),
       })
         .then((response) => response.json())
         .catch((error) => {
@@ -62,7 +63,9 @@ function Form() {
           onClick={() => setType('bottom')}
         />
         <label htmlFor='bottom'>Bottom</label>
-        <label className='formQuestion'>What is the weather like when you wear this?</label>  
+        <label className='formQuestion'>
+          What is the weather like when you wear this?
+        </label>
         <select
           value={weather}
           name='weather'
@@ -75,10 +78,15 @@ function Form() {
           <option value='cold'>Cold</option>
         </select>
         <br></br>
-        <input className='submit' type='submit' value='Submit' onClick={onSubmit}></input>
+        <input
+          className='submit'
+          type='submit'
+          value='Submit'
+          onClick={onSubmit}
+        ></input>
       </form>
     </div>
   );
-}
+};
 
 export default Form;
