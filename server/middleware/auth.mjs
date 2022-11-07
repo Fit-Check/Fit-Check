@@ -3,7 +3,9 @@ import jwt from 'jsonwebtoken';
 const verifyToken = (req, res, next) => {
   try {
     const token =
-      req.body.token || req.query.token || req.headers['x-access-token'];
+      req.body.token ||
+      req.query.token ||
+      req.headers.authorization.split(' ')[1];
     if (!token) {
       return next({
         log: 'Error caught in verifyToken middleware',
