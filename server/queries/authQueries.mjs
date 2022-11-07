@@ -6,7 +6,7 @@ export const checkUserInDB = async (queryInfo) => {
       'SELECT * FROM users WHERE username=$1',
       queryInfo
     );
-    return foundUser.rows;
+    return foundUser.rows[0];
   } catch (error) {
     console.log(error, 'checkUserInDB');
   }
@@ -18,7 +18,7 @@ export const saveNewUser = async (queryInfo) => {
       'INSERT INTO users(firstname, lastname, username, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *',
       queryInfo
     );
-    return savedUser.rows;
+    return savedUser.rows[0];
   } catch (error) {
     console.log(error, 'saveNewUser');
   }

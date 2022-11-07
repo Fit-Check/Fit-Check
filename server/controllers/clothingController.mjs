@@ -110,9 +110,3 @@ clothingController.saveNewClothes = async (req, res, next) => {
 };
 
 export default clothingController;
-
-// {
-//     name:
-//     weather: //sunny, rainy, hot, cold
-//     clothingType: //top or bottom
-// }
