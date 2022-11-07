@@ -5,37 +5,43 @@ import Form from './Form.jsx';
 import Fitcheck from './Fitcheck.jsx';
 import Wardrobe from './Wardrobe.jsx';
 import '../styles.css';
+import logo from '../img/fit-check-logo.png';
 
 function App() {
   return (
-    <>
-      <Router>
-        <Switch>
-          <Route exact path='/'>
-            <div>
-              <div>
-                <Link to='/fitCheck'>
-                  <button id='goFit'>Go to Fitcheck</button>
-                </Link>
+    <div className='mainContainer'>
+      <header>
+        <img src={logo} alt="" />
+      </header>
+      <div className='contentContainer'>
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+              <div className='optionContainer'>
+                <div className='fitCheckContainer'>
+                  <Link to='/fitCheck'>
+                    <button className='btnGoFit'>Go to Fitcheck</button>
+                  </Link>
+                </div>
+                <Form />
               </div>
-              <Form />
-            </div>
-          </Route>
-          <Route path='/fitCheck'>
-            <div>
-              <div>
-                <Link to='/'>
-                  <button id='back'>Add More Outfits</button>
-                </Link>
+            </Route>
+            <Route path='/fitCheck'>
+              <div className='fitcheck-container'>
+                <div>
+                  <Link to='/'>
+                    <button className='btnGoBack'>Add More Outfits</button>
+                  </Link>
+                </div>
+                <Fitcheck />
               </div>
-              <Fitcheck />
-            </div>
-          </Route>
-        </Switch>
-      </Router>
-      <br></br>
-      <Wardrobe />
-    </>
+            </Route>
+          </Switch>
+        </Router>
+        <br></br>
+        <Wardrobe />
+      </div>
+    </div>
   );
 }
 
