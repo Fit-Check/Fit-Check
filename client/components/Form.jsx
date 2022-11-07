@@ -69,10 +69,10 @@ function Form() {
           onChange={(e) => setWeather(e.target.value)}
         >
           <option value=''></option>
-          <option value='sunny'>Sunny</option>
-          <option value='rainy'>Rainy</option>
-          <option value='cold'>Cold</option>
           <option value='hot'>Hot</option>
+          <option value='perfect'>Perfect</option>
+          <option value='cool'>Cool</option>
+          <option value='cold'>Cold</option>
         </select>
         <br></br>
         <input className='submit' type='submit' value='Submit' onClick={onSubmit}></input>
