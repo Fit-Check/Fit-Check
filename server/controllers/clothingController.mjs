@@ -34,9 +34,11 @@ clothingController.getAllClothes = async (req, res, next) => {
 // get specific cloth
 ///:weather/:userID
 clothingController.getClothesForWeather  = async (req, res, next) => {
+  console.log('Trying to get appropriate clothes for the weather!')
   try{
     //check if weather and userID params are available
     const {userID, weather } = req.params;
+    console.log(weather)
     //if not available, invoke error handler
     if (!userID || !weather) {
       return next({
@@ -45,8 +47,14 @@ clothingController.getClothesForWeather  = async (req, res, next) => {
         message: { err: 'Incomplete params on request url.' },
       });
     }
+
+    let feelTemp;
+    if(weather >= 80) feelTemp = 'hot';
+    if(weather <= 79 && weather >= 68) feelTemp = 'perfect';
+    if(weather <= 67 && weather >= 47) feelTemp = 'cool';
+    if(weather <= 46) feelTemp = 'cold';
     // if available, make query to database with those info
-    const clothes = await getWeatherClothes([userID, weather]);
+    const clothes = await getWeatherClothes([userID, feelTemp]);
     // save to locals 
     res.locals.weatherClothes = clothes;
     // return next
@@ -102,9 +110,3 @@ clothingController.saveNewClothes = async (req, res, next) => {
 };
 
 export default clothingController;
-
-// {
-//     name:
-//     weather: //sunny, rainy, hot, cold
-//     clothingType: //top or bottom
-// }

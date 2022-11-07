@@ -15,7 +15,7 @@ function Wardrobe() {
       fetch('/clothes/1')
         .then((data) => data.json())
         .then((result) => {
-          // console.log(result)
+          console.log('Result from get all clothes fetch:', result)
           setWardrobe([...result.top, ...result.bottom])})
         .catch((err) => {
           console.log('error after fetch', err);

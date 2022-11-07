@@ -33,7 +33,7 @@ Compare the user's password to the one we saved earlier in our database.
 Finally, construct a JWT token that is signed.
 */
 router.post('/login', verifyUserInput, confirmUser, (req, res) => {
-  return res.status(200).json();
+  return res.status(200).json(res.locals.user);
 });
 
 export default router;
