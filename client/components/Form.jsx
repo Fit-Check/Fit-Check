@@ -8,26 +8,26 @@ function Form() {
   const [name, setName] = useState('');
   const [weather, setWeather] = useState('');
   const [clothingType, setType] = useState('');
-  //   const [user, setUser] = useState('');
+    // const [user, setUser] = useState('');
 
   function onSubmit() {
     // send post request to server containing state
-
     if (name && weather && clothingType) {
       console.log(name, clothingType, weather);
-      axios
-        .post('/', {
-          // req.body.name/weather
-          // user: user,
-          name: name, // name of clothing as string
-          weather: weather, // Sunny, Rainy, Cold, Hot
-          clothingType: clothingType, // 'top' or 'bottom'
+      fetch('/clothes/' + '1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name, // name of clothing as string
+          weather, // Sunny, Rainy, Cold, Hot
+          clothingType // 'top' or 'bottom'
         })
-        .then((response) => {
-          console.log(response);
-        })
+      })
+        .then((response) => response.json())
         .catch((error) => {
-          console.log(error);
+          console.log(error, 'error');
         });
     }
   }
@@ -69,10 +69,10 @@ function Form() {
           onChange={(e) => setWeather(e.target.value)}
         >
           <option value=''></option>
-          <option value='Sunny'>Sunny</option>
-          <option value='Rainy'>Rainy</option>
-          <option value='Cold'>Cold</option>
-          <option value='Hot'>Hot</option>
+          <option value='sunny'>Sunny</option>
+          <option value='rainy'>Rainy</option>
+          <option value='cold'>Cold</option>
+          <option value='hot'>Hot</option>
         </select>
         <br></br>
         <input className='submit' type='submit' value='Submit' onClick={onSubmit}></input>

@@ -14,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', authRouter);
-app.use('/clothes', auth, clothingRouter);
+app.use('/clothes', clothingRouter);
+// app.use('/', authRouter);
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
