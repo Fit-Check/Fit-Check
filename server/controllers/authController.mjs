@@ -37,7 +37,7 @@ export const checkIfUserExists = async (req, res, next) => {
       ? await checkUserInDB([username])
       : await checkUserInDB([email]);
 
-    if (user.length) {
+    if (user) {
       req.route.path === '/signup'
         ? next({
           log: 'Error caught in checkIfUserExists controller',
@@ -55,7 +55,7 @@ export const checkIfUserExists = async (req, res, next) => {
 export const encryptPasswordAndSaveNewUser = async (req, res, next) => {
   try {
     const { firstname, lastname, username, email, password } = req.body;
-    const hashedPassword = bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await saveNewUser([
       firstname,
       lastname,
@@ -83,7 +83,7 @@ export const constructSignedJWT = async (req, res, next) => {
       process.env.SECRET,
       { expiresIn: '48h' }
     );
-    console.log(token, 'token');
+    delete savedUserInfo.password;
     savedUserInfo.token = token;
     res.locals.newlyCreatedUser = savedUserInfo;
     return next();
@@ -96,6 +96,7 @@ export const confirmUser = async (req, res, next) => {
   try {
     // Get user input
     const { email, username, password } = req.body;
+
     // Validate user input
     if (!((email || username) && password)) {
       return next({
@@ -104,12 +105,12 @@ export const confirmUser = async (req, res, next) => {
         message: { err: 'All input fields are required.' },
       });
     }
-    // Validate if user exist in our database
+    // Validate if user exists in database
     const user = username
       ? await checkUserInDB([username])
       : await checkUserInDB([email]);
-
-    if (user && bcrypt.compare(password, user.password)) {
+    // comapre passwords if user exists
+    if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign(
         {
           id: user.id,
@@ -119,8 +120,9 @@ export const confirmUser = async (req, res, next) => {
         process.env.SECRET,
         { expiresIn: '48h' }
       );
+      delete user.password;
       user.token = token;
-      res.local.user = user;
+      res.locals.user = user;
       return next();
     }
     // if passwrod don't match
