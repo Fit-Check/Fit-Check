@@ -8,8 +8,8 @@ const Clothe = ({ clothing }) => {
   const { name, style } = clothing;
   return (
     <div id='clothingCard'>
-      <p>Name: {name}</p>
-      <p>Style: {style}</p>
+      <p><strong>Name:</strong> {name}</p>
+      <p><strong>Style:</strong> {style}</p>
     </div>
   );
 };
