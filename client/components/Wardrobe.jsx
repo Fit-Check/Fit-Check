@@ -19,9 +19,11 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
       }) //${id}
         .then((data) => data.json())
         .then((result) => {
+
           // console.log(result)
           setWardrobe([...result.top, ...result.bottom]);
         })
+
         .catch((err) => {
           console.log('error after fetch', err);
         });

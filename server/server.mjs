@@ -14,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/clothes', clothingRouter);
-// app.use('/', authRouter);
+app.use('/clothes', auth, clothingRouter);
+app.use('/', authRouter);
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
@@ -36,4 +36,4 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(3000); //listens on port 3000 -> http://localhost:3000/
+app.listen(3000 || process.env.PORT); //listens on port 3000 -> http://localhost:3000/

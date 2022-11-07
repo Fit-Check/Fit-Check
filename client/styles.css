@@ -144,9 +144,9 @@ input {
 }
 
 .btnYolo {
-  margin: 0 47%;
+  margin: 0 44%;
   padding: 0.5rem;
-  width: fit-content;
+  width: 5rem;
   font-size: 1rem;
   color: #023047;
   background-color: #fb8500;
