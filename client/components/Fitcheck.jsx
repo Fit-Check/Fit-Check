@@ -34,7 +34,7 @@ function Fitcheck() {
   };
 
   //   useEffect(() => {
-  //     console.log('useeffect');
+  //     console.log('useffect');
   //     // function fetchData() {
   //     //   fetch('/api/')
   //     //     .then((data) => data.json())
@@ -47,32 +47,32 @@ function Fitcheck() {
   //     generateOutfit();
   //   }, []);
 
-  function onSubmit() {
-    // send post request to server containing state
-    console.log(name, clothingType, weather);
-    axios
-      .post('/', {
-        weather: weather, // Sunny, Rainy, Cold, Hot // req.body.name/weather
-      })
-      .then((response) => {
-        console.log(response);
-        setTopsArray(response.tops);
-        setBottomsArray(response.bottoms);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    generateOutfit();
-  }
+  // function onSubmit() {
+  //   // send post request to server containing state
+  //   console.log(name, clothingType, weather);
+  //   axios
+  //     .post('/', {
+  //       weather: weather, // Sunny, Rainy, Cold, Hot // req.body.name/weather
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       setTopsArray(response.tops);
+  //       setBottomsArray(response.bottoms);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  //   generateOutfit();
+  // }
 
   return (
     <div id='fitcheck'>
       <h2>What is the weather like today?</h2>
-      <form>
-        <label></label>
+      <form className='todayWeather-form'>
+        <label htmlFor='weatherOptions'></label>
         <select
           value={weather}
-          name='weather'
+          name='weatherOptions'
           onChange={(e) => setWeather(e.target.value)}
         >
           <option value=''></option>
@@ -82,10 +82,11 @@ function Fitcheck() {
           <option value='Hot'>Hot</option>
         </select>
       </form>
-      <h1>Your outfit for the day!</h1>
+      {/* make the below into a new component that will be rendered on change */}
+      <h2 className=''>Your outfit for the day!</h2>
       <p>{currTop}</p>
       <p>{currBottom}</p>
-      <button onClick={generateOutfit}>yolo</button>
+      <button className='btnYolo' onClick={generateOutfit}>yolo</button>
     </div>
   );
 }

@@ -34,26 +34,26 @@ function Form() {
 
   return (
     <div id='form'>
-      <h1>What is your new fit? </h1>
+      <h2>What is your new fit?</h2>
       <form>
-        <label>What is your piece called? </label>
+        <label className='formQuestion'>Describe your new piece:</label>
         <input
           type='text'
           value={name}
-          minlength='1'
-          size='10'
+          minLength='1'
+          size='20'
+          placeholder='bell bottom jeans'
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <br></br>
-        <label>What is the new piece?</label>
+        <label className='formQuestion'>Do you wear your new piece on</label>
         <input
           type='radio'
           id='top'
           name='new_piece'
           value='Top'
           onClick={() => setType('top')}
-        />{' '}
-        <label for='top'>Top</label>
+        />
+        <label htmlFor='top'>Top</label>
         <input
           type='radio'
           id='bottom'
@@ -61,9 +61,8 @@ function Form() {
           value='Bottom'
           onClick={() => setType('bottom')}
         />
-          <label for='bottom'>Bottom</label>
-        <br></br>
-        <label>What is the weather like when you wear this? </label>
+        <label htmlFor='bottom'>Bottom</label>
+        <label className='formQuestion'>What is the weather like when you wear this?</label>  
         <select
           value={weather}
           name='weather'
@@ -76,7 +75,7 @@ function Form() {
           <option value='Hot'>Hot</option>
         </select>
         <br></br>
-        <input type='submit' value='Submit' onClick={onSubmit}></input>
+        <input className='submit' type='submit' value='Submit' onClick={onSubmit}></input>
       </form>
     </div>
   );

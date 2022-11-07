@@ -48,9 +48,9 @@ function Wardrobe() {
     clothingArr.push(<Clothe clothing={wardrobe[i]}></Clothe>);
   }
   return (
-    <div class='wardrobeBox'>
-      <h1>In your closet</h1>
-      <div class='grid'>{clothingArr}</div>
+    <div className='wardrobeBox'>
+      <h2>~ In Your Closet ~</h2>
+      <div className='grid'>{clothingArr}</div>
     </div>
   );
 }
