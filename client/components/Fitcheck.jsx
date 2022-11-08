@@ -2,33 +2,42 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Fitcheck = ({ userId, setUserId, token, setToken }) => {
+const Fitcheck = ({ userId, setUserId }) => {
   const [topsArr, setTopsArray] = useState([]);
   const [bottomsArr, setBottomsArray] = useState([]);
+  const { user_id } = useParams();
+  const [token, setToken] = useState('');
+  const [weather, setWeather] = useState('');
 
   // const [currTop, chooseTop] = useState('');
   // const [currBottom, chooseBottom] = useState('');
-  const [weather, setWeather] = useState('');
-  
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, []);
+
   function getCurrWeather() {
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=30.49&lon=-92.41&appid=51bc9ba3a9de3e5aa5c7dc601894c699')
-      .then(data => data.json())
-      .then(data => {
-        console.log(data.main.temp)
+    fetch(
+      'https://api.openweathermap.org/data/2.5/weather?lat=30.49&lon=-92.41&appid=51bc9ba3a9de3e5aa5c7dc601894c699'
+    )
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data.main.temp);
         const kelvinTemp = data.main.temp;
         // (298K − 273.15) × 9/5 + 32 = 76.73°F
-        //convert to fahrenheit 
-        const fahTemp = ((kelvinTemp - 273.15) * (9/5) + 32);
-        console.log(fahTemp)
+        //convert to fahrenheit
+        const fahTemp = (kelvinTemp - 273.15) * (9 / 5) + 32;
+        console.log(fahTemp);
         return fahTemp;
-      }).then((temp => {
+      })
+      .then((temp) => {
         const currTemp = Math.floor(temp);
         setWeather(currTemp);
-      }))
-      .catch(err => console.log(err))
+      })
+      .catch((err) => console.log(err));
   }
-  
+
   getCurrWeather();
 
   function onSubmit() {
@@ -52,7 +61,7 @@ const Fitcheck = ({ userId, setUserId, token, setToken }) => {
 
   return (
     <div id='fitcheck'>
-      {weather ? (<h2>Today, the weather is {weather}° F!</h2>) : null}
+      {weather ? <h2>Today, the weather is {weather}° F!</h2> : null}
       {/* <h2>What is the weather like today?</h2>
       <form className='todayWeather-form'>
         <label htmlFor='weatherOptions'></label>
@@ -71,9 +80,17 @@ const Fitcheck = ({ userId, setUserId, token, setToken }) => {
       {/* make the below into a new component that will be rendered on change */}
       {/* <h2 className=''>Your outfit for the day!</h2> */}
 
-      {topsArr.length && bottomsArr.length ? (<p>Your outfit for today is your {topsArr[Math.floor(Math.random() * topsArr.length)].name} and {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}!</p>) : null}
+      {topsArr.length && bottomsArr.length ? (
+        <p>
+          Your outfit for today is your{' '}
+          {topsArr[Math.floor(Math.random() * topsArr.length)].name} and{' '}
+          {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}!
+        </p>
+      ) : null}
       {/* {bottomsArr.length ? (<p> and your {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}</p>) : null} */}
-      <button className='btnYolo' onClick={onSubmit}>Get It!</button>
+      <button className='btnYolo' onClick={onSubmit}>
+        Get It!
+      </button>
     </div>
   );
 };

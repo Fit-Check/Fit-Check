@@ -40,10 +40,10 @@ export const checkIfUserExists = async (req, res, next) => {
     if (user) {
       req.route.path === '/signup'
         ? next({
-          log: 'Error caught in checkIfUserExists controller',
-          status: 400,
-          message: { err: 'Username or email has already been registered.' },
-        })
+            log: 'Error caught in checkIfUserExists controller',
+            status: 400,
+            message: { err: 'Username or email has already been registered.' },
+          })
         : (res.locals.user = user);
     }
     return next();
@@ -55,11 +55,7 @@ export const checkIfUserExists = async (req, res, next) => {
 export const encryptPasswordAndSaveNewUser = async (req, res, next) => {
   try {
     const { firstname, lastname, username, email, password } = req.body;
-<<<<<<< HEAD
-    const hashedPassword = bcrypt.hash(password, 10);
-=======
     const hashedPassword = await bcrypt.hash(password, 10);
->>>>>>> e282824f196d82e0093042ce71d5174a83455aa3
     const newUser = await saveNewUser([
       firstname,
       lastname,
@@ -87,11 +83,7 @@ export const constructSignedJWT = async (req, res, next) => {
       process.env.SECRET,
       { expiresIn: '48h' }
     );
-<<<<<<< HEAD
-    console.log(token, 'token');
-=======
     delete savedUserInfo.password;
->>>>>>> e282824f196d82e0093042ce71d5174a83455aa3
     savedUserInfo.token = token;
     res.locals.newlyCreatedUser = savedUserInfo;
     return next();
@@ -104,10 +96,6 @@ export const confirmUser = async (req, res, next) => {
   try {
     // Get user input
     const { email, username, password } = req.body;
-<<<<<<< HEAD
-=======
-
->>>>>>> e282824f196d82e0093042ce71d5174a83455aa3
     // Validate user input
     if (!((email || username) && password)) {
       return next({
@@ -116,21 +104,12 @@ export const confirmUser = async (req, res, next) => {
         message: { err: 'All input fields are required.' },
       });
     }
-<<<<<<< HEAD
-    // Validate if user exist in our database
-    const user = username
-      ? await checkUserInDB([username])
-      : await checkUserInDB([email]);
-
-    if (user && bcrypt.compare(password, user.password)) {
-=======
     // Validate if user exists in database
     const user = username
       ? await checkUserInDB([username])
       : await checkUserInDB([email]);
     // comapre passwords if user exists
     if (user && (await bcrypt.compare(password, user.password))) {
->>>>>>> e282824f196d82e0093042ce71d5174a83455aa3
       const token = jwt.sign(
         {
           id: user.id,
@@ -140,14 +119,10 @@ export const confirmUser = async (req, res, next) => {
         process.env.SECRET,
         { expiresIn: '48h' }
       );
-<<<<<<< HEAD
-      user.token = token;
-      res.local.user = user;
-=======
       delete user.password;
       user.token = token;
       res.locals.user = user;
->>>>>>> e282824f196d82e0093042ce71d5174a83455aa3
+      console.log(res.locals.user, ' res.locals.user');
       return next();
     }
     // if passwrod don't match

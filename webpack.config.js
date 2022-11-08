@@ -46,7 +46,7 @@ module.exports = {
       directory: path.resolve(__dirname, 'dist'),
     },
     proxy: {
-      '/clothes': 'http://localhost:3000',
+      '/': 'http://[::1]:3000',
     },
   },
 };

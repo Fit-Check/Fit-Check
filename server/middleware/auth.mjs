@@ -6,6 +6,7 @@ const verifyToken = (req, res, next) => {
       req.body.token ||
       req.query.token ||
       req.headers.authorization.split(' ')[1];
+    console.log(token, 'is token seen?');
     if (!token) {
       return next({
         log: 'Error caught in verifyToken middleware',

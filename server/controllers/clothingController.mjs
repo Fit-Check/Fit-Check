@@ -20,7 +20,8 @@ clothingController.getAllClothes = async (req, res, next) => {
         message: { err: 'Incomplete params on request url.' },
       });
     }
-    if (userID === req.user.id) {
+    console.log(userID, req.user.id, 'comparing ids');
+    if (userID == req.user.id) {
       res.locals.allClothes = await getAllClothes([userID]);
       return next();
     } else {
@@ -57,7 +58,7 @@ clothingController.getClothesForWeather = async (req, res, next) => {
         message: { err: 'Incomplete params on request url.' },
       });
     }
-    if (userID === req.user.id) {
+    if (userID == req.user.id) {
       let feelTemp;
       if (weather >= 80) feelTemp = 'hot';
       if (weather <= 79 && weather >= 68) feelTemp = 'perfect';
@@ -126,4 +127,3 @@ clothingController.saveNewClothes = async (req, res, next) => {
 };
 
 export default clothingController;
-

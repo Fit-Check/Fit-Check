@@ -4,15 +4,18 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Form = ({ userId, setUserId, token, setToken }) => {
+const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
   const [name, setName] = useState('');
   const [weather, setWeather] = useState('');
   const [clothingType, setType] = useState('');
   // const [user, setUser] = useState('');
 
+  console.log(token, 'token');
+  console.log(userId, 'userId');
   function onSubmit() {
     // send post request to server containing state
     if (name && weather && clothingType) {
+      console.log(name, clothingType, weather);
       console.log(name, clothingType, weather);
       fetch(`/clothes/${userId}`, {
         method: 'POST',
@@ -27,6 +30,10 @@ const Form = ({ userId, setUserId, token, setToken }) => {
         }),
       })
         .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          setRefetch(true);
+        })
         .catch((error) => {
           console.log(error, 'error');
         });
@@ -80,7 +87,7 @@ const Form = ({ userId, setUserId, token, setToken }) => {
         <br></br>
         <input
           className='submit'
-          type='submit'
+          type='button'
           value='Submit'
           onClick={onSubmit}
         ></input>

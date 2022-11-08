@@ -5,7 +5,7 @@ import {
   Switch,
   Route,
   Link,
-  Redirect,
+  Navigate,
 } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -66,7 +66,7 @@ function SignUp() {
           onClick={onSubmit}
         ></input>
       </form>
-      {authorize ? <Redirect to='/' /> : null}
+      {authorize ? <Navigate to='/home' /> : null}
     </div>
   );
 }

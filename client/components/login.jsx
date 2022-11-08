@@ -5,43 +5,54 @@ import {
   Switch,
   Route,
   Link,
-  Redirect,
+  Navigate,
+  useNavigate,
 } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const Login = () => {
+const Login = ({ userId, setUserId }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [authorize, setAuthorize] = useState(false);
-
+  const [error, setError] = useState('');
+  // const [token, setToken] = useState('');
+  const navigate = useNavigate();
   const onSubmit = (e) => {
-    e.preventDefault();
-    // fetch('/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     username,
-    //     password,
-    //     email,
-    //   }),
-    // }).then((response) => setAuthorize(response));
+    try {
+      e.preventDefault();
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email,
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          console.log(response, 'response');
+          setUserId(response.id);
+          localStorage.setItem('token', response.token);
+          if (response.token) {
+            setAuthorize(true);
+          }
+          navigate(`/home/${response.id}`);
+        });
+    } catch (error) {
+      setError(error.message.err);
+      // window.alert(error.message.err);
+      console.log(error.message, 'error from login in');
+    }
     // setAuthorize((preState) => {
     //   return !preState;
     // });
-    setAuthorize(true);
   };
-
-  //   <Switch>
-  //         <Route exact path="/login" component={Login} />
-  //         <Route exact path="/signup" component={SignUp} />
-  //         { authorize &&
-  //           <Route exact path="/Welcome" component={Welcome} />
-  //         }
-  //       </Switch>
-  //<Link exact path='/'></Link>
 
   return (
     <div id='login'>
@@ -54,7 +65,12 @@ const Login = () => {
       <button type='submit' onClick={(e) => onSubmit(e)}>
         Login
       </button>
-      {authorize ? <Redirect to='/' /> : null}
+      <span>
+        Don't have an account? <Link to='/signup'>Signup</Link>
+      </span>
+      {error ? <span>{error}</span> : null}
+
+      {authorize ? <Navigate to={`/home/${userId}`} /> : null}
     </div>
   );
 };
