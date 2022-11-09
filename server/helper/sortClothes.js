@@ -10,4 +10,4 @@ const sortClothes = (clothesArray) => {
   return sorted;
 };
 
-export { sortClothes };
+module.exports = { sortClothes };
