@@ -214,6 +214,7 @@ authController.encryptPasswordAndSaveNewUser = async (req, res, next) => {
 module.exports = authController;
 
 // authorization token created with jsonwebtoken
+
 // export const constructSignedJWT = async (req, res, next) => {
 //   try {
 //     const savedUserInfo = res.locals.newlyCreatedUser;
@@ -251,7 +252,9 @@ module.exports = authController;
 //     const user = username
 //       ? await checkUserInDB([username])
 //       : await checkUserInDB([email]);
+
 // comapre passwords if user exists
+
 //     if (user && (await bcrypt.compare(password, user.password))) {
 //       const token = jwt.sign(
 //         {
@@ -268,7 +271,7 @@ module.exports = authController;
 //       console.log(res.locals.user, ' res.locals.user');
 //       return next();
 //     }
-//     // if passwrod don't match
+
 //     return next({
 //       log: 'Error caught in confirmUser controller',
 //       status: 400,

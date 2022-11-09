@@ -18,6 +18,7 @@ function App() {
       <header>
         <img src={logo} alt='' />
       </header>
+
       <div className='contentContainer'>
         <Routes>
           <Route
@@ -54,6 +55,7 @@ function App() {
             element={<Wardrobe userId={userId} token={token} />}
           ></Route>
         </Routes>
+
       </div>
     </div>
   );

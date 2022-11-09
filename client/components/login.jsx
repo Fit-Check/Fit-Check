@@ -3,26 +3,28 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = ({ userId, setUserId }) => {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [authorize, setAuthorize] = useState(false);
-  // const [error, setError] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [authorize, setAuthorize] = useState(false);
+  const [error, setError] = useState('');
   // const [token, setToken] = useState('');
 
   // custom hook for handling login page inputs
   const loginInputs = {
-    username: '',
-    password: '',
-    email: '',
+    username,
+    password,
+    email,
   };
 
   // use navigate for navigation to login page
   const navigate = useNavigate();
 
+
   const navigateToHome = () => {
     navigate('/home');
   };
+
 
   // hook for storing state based on users login in for inputs
   const [inputData, setInputData] = useState(loginInputs);
@@ -65,6 +67,7 @@ const Login = ({ userId, setUserId }) => {
   // };
 
   // handleSubmit function for sending our login request to the backend
+
   const handleSubmit = (e) => {
     e.preventDefault();
     (async function userLogin() {
@@ -85,6 +88,7 @@ const Login = ({ userId, setUserId }) => {
         alert('login information not valid');
       }
     });
+
   };
 
   // const handleHome = (e) => {
@@ -130,16 +134,18 @@ const Login = ({ userId, setUserId }) => {
           onChange={(e) => handleChange(e, 'password')}
           // onChange={(e) => handleChange(e.target.value, 'password')}
           // onChange={(e) => setPassword(e.target.value)}
-        />
+      />
 
         <p>Email:</p>
         <input
+
           type='text'
           placeholder='email'
           onChange={(e) => handleChange(e, 'email')}
           // value={inputData.email}
           // onChange={(e) => handleChange(e.target.value, 'email')}
           // onChange={(e) => setEmail(e.target.value)}
+
         />
 
         {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
@@ -148,6 +154,7 @@ const Login = ({ userId, setUserId }) => {
           <button
             className='login-button'
             type='submit'
+
             onClick={navigateToHome}
             // onClick={(e) => handleSubmit(e)}
           >
@@ -162,15 +169,4 @@ const Login = ({ userId, setUserId }) => {
     </div>
   );
 };
-
-// {authorize ? <p>authorized</p> : null}
-// {topsArr.length && bottomsArr.length ? (
-//     <p>
-//       Your outfit for today is your{' '}
-//       {topsArr[Math.floor(Math.random() * topsArr.length)].name} and your{' '}
-//       {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}
-//     </p>
-//   ) : null}
-
-//// {authorize ? <Navigate to={`/home/${userId}`} /> : null}
 export default Login;
