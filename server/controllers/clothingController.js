@@ -2,7 +2,7 @@ import {
   getAllClothes,
   getWeatherClothes,
   saveNewClothes,
-} from '../queries/clothingQueries.mjs';
+} from '../queries/clothingQueries.js';
 
 const clothingController = {};
 

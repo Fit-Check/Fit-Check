@@ -1,4 +1,4 @@
-import db from '../models/clothingModels.mjs';
+const db = require('../models/clothingModels.js');
 
 export const checkUserInDB = async (queryInfo) => {
   try {

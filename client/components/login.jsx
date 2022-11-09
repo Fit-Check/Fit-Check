@@ -57,43 +57,34 @@ const Login = ({ userId, setUserId }) => {
   return (
     <div id='login'>
       <form onSubmit={handleLogin}>
-        <div className='form-container'>
-          <p>Username:</p>
-          <input
-            type='text'
-            placeholder='username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <p>Password:</p>
-          <input
-            type='text'
-            placeholder='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <p>Email:</p>
-          <input
-            type='text'
-            placeholder='email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <p>Username:</p>
+        <input
+          type='text'
+          placeholder='username'
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <p>Password:</p>
+        <input
+          type='text'
+          placeholder='password'
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p>Email:</p>
+        <input
+          type='text'
+          placeholder='email'
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
         {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
 
-        <div>
-          <button
-            className='login-button'
-            type='submit'
-            onClick={(e) => handleLogin(e)}
-          >
-            Login
-          </button>{' '}
-          <button className='sign-up-button'>
-            <Link to='/signup'>Signup</Link>
-          </button>
-          <p className='no-account'>Dont have an account?</p>
-          {error ? <span>{error}</span> : null}
-        </div>
+        <button type='submit' onClick={(e) => handleLogin(e)}>
+          Login
+        </button>
+        <span>
+          Dont have an account? <Link to='/signup'>Signup</Link>
+        </span>
+        {error ? <span>{error}</span> : null}
       </form>
     </div>
   );

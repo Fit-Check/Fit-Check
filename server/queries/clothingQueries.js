@@ -1,5 +1,5 @@
-import db from '../models/clothingModels.mjs';
-import { sortClothes } from '../helper/sortClothes.mjs';
+import db from '../models/clothingModels.js';
+import { sortClothes } from '../helper/sortClothes.js';
 
 const getAllClothes = async (queryInfo) => {
   try {
@@ -29,11 +29,11 @@ const getWeatherClothes = async (queryInfo) => {
 
 const saveNewClothes = async (queryInfo) => {
   try {
-    const savedClothes = await db.query(
+    const savedClothe = await db.query(
       'INSERT INTO clothes (user_id, name, weather, type) VALUES ($1, $2, $3, $4) RETURNING *',
       queryInfo
     );
-    return savedClothes;
+    return savedClothe;
   } catch (error) {
     console.log(error, 'error in getWeatherClothes under queries');
   }
