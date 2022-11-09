@@ -15,6 +15,7 @@ const FitCheck = ({ userId, setUserId }) => {
     setToken(localStorage.getItem('token'));
   }, []);
 
+  // geolocation api calls here for latitude and longitude which can be given as variables to below weather api call
   function getCurrWeather() {
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?lat=30.49&lon=-92.41&appid=51bc9ba3a9de3e5aa5c7dc601894c699'
