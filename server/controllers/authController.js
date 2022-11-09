@@ -1,4 +1,4 @@
-const db = require('../models/clothingModel');
+const db = require('../models/clothingModels');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
