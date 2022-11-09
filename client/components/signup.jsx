@@ -1,13 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Navigate,
-} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
 
 function SignUp() {
@@ -18,6 +11,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
   const [authorize, setAuthorize] = useState(false);
+  const navigate = useNavigate('');
 
   // const { firstname, lastname, username, email, password, location } = req.body;
   function onSubmit() {

@@ -1,15 +1,13 @@
-
-
 const sortClothes = (clothesArray) => {
   const sorted = {
     top: [],
-    bottom: []
+    bottom: [],
   };
-  clothesArray.forEach(clotheObj => {
-    sorted[clotheObj.type].push(clotheObj);
+  clothesArray.forEach((clothesObj) => {
+    sorted[clothesObj.type].push(clothesObj);
   });
 
   return sorted;
 };
 
-export {sortClothes};
+export { sortClothes };

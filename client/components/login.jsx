@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Login = ({ userId, setUserId }) => {
   const [username, setUsername] = useState('');
@@ -18,7 +10,7 @@ const Login = ({ userId, setUserId }) => {
   const [error, setError] = useState('');
   // const [token, setToken] = useState('');
   const navigate = useNavigate();
-  const onSubmit = (e) => {
+  const handleLogin = (e) => {
     try {
       e.preventDefault();
       fetch('/login', {
@@ -36,6 +28,7 @@ const Login = ({ userId, setUserId }) => {
           return response.json();
         })
         .then((response) => {
+          console.log('this is username and password', username, password);
           console.log(response, 'response');
           setUserId(response.id);
           localStorage.setItem('token', response.token);
@@ -54,23 +47,45 @@ const Login = ({ userId, setUserId }) => {
     // });
   };
 
+  const handleHome = (e) => {
+    e.preventDefault();
+    if (authorize) {
+      navigate(`/home/${userId}`);
+    }
+  };
+
   return (
     <div id='login'>
-      <p>Username:</p>
-      <input type='text' onChange={(e) => setUsername(e.target.value)} />
-      <p>Password:</p>
-      <input type='text' onChange={(e) => setPassword(e.target.value)} />
-      <p>Email:</p>
-      <input type='text' onChange={(e) => setEmail(e.target.value)} />
-      <button type='submit' onClick={(e) => onSubmit(e)}>
-        Login
-      </button>
-      <span>
-        Don't have an account? <Link to='/signup'>Signup</Link>
-      </span>
-      {error ? <span>{error}</span> : null}
+      <form onSubmit={handleLogin}>
+        <p>Username:</p>
+        <input
+          type='text'
+          placeholder='username'
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <p>Password:</p>
+        <input
+          type='text'
+          placeholder='password'
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p>Email:</p>
+        <input
+          type='text'
+          placeholder='email'
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      {authorize ? <Navigate to={`/home/${userId}`} /> : null}
+        {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
+
+        <button type='submit' onClick={(e) => handleLogin(e)}>
+          Login
+        </button>
+        <span>
+          Dont have an account? <Link to='/signup'>Signup</Link>
+        </span>
+        {error ? <span>{error}</span> : null}
+      </form>
     </div>
   );
 };
@@ -83,4 +98,6 @@ const Login = ({ userId, setUserId }) => {
 //       {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}
 //     </p>
 //   ) : null}
+
+//// {authorize ? <Navigate to={`/home/${userId}`} /> : null}
 export default Login;

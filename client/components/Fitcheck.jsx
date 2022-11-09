@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Fitcheck = ({ userId, setUserId }) => {
+const FitCheck = ({ userId, setUserId }) => {
   const [topsArr, setTopsArray] = useState([]);
   const [bottomsArr, setBottomsArray] = useState([]);
   const { user_id } = useParams();
@@ -97,4 +95,4 @@ const Fitcheck = ({ userId, setUserId }) => {
 
 // [top1, top2, top3][(bottom1, bottom2, bottom3)];
 
-export default Fitcheck;
+export default FitCheck;

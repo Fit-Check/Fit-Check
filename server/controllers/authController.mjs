@@ -108,7 +108,7 @@ export const confirmUser = async (req, res, next) => {
     const user = username
       ? await checkUserInDB([username])
       : await checkUserInDB([email]);
-    // comapre passwords if user exists
+    // compare passwords if user exists
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign(
         {
@@ -125,7 +125,7 @@ export const confirmUser = async (req, res, next) => {
       console.log(res.locals.user, ' res.locals.user');
       return next();
     }
-    // if passwrod don't match
+    // if password don't match
     return next({
       log: 'Error caught in confirmUser controller',
       status: 400,

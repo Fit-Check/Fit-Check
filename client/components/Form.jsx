@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
@@ -50,7 +48,7 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
           value={name}
           minLength='1'
           size='20'
-          placeholder='bell bottom jeans'
+          placeholder='apple bottom jeans'
           onChange={(e) => setName(e.target.value)}
         ></input>
         <label className='formQuestion'>Do you wear your new piece on</label>

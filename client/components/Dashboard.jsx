@@ -19,7 +19,7 @@ export default function Dashboard() {
       <div className='optionContainer'>
         <div className='fitCheckContainer'>
           <Link to='/fitCheck'>
-            <button className='btnGoFit'>Go to Fitcheck</button>
+            <button className='btnGoFit'>Go to Fit Check</button>
           </Link>
         </div>
         <Form
