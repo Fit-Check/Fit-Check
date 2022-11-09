@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,18 +9,13 @@ const FitCheck = ({ userId, setUserId }) => {
   const { user_id } = useParams();
   const [token, setToken] = useState('');
   const [weather, setWeather] = useState('');
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
 
   const geolocationAPI = navigator.geolocation;
   const locationURL = process.env.REACT_APP_BASE_URL;
   const locationKey = process.env.REACT_APP_API_KEY;
+
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
-
-  const geolocationAPI = navigator.geolocation;
-  const locationURL = process.env.REACT_APP_BASE_URL;
-  const locationKey = process.env.REACT_APP_API_KEY;
 
   // const [currTop, chooseTop] = useState('');
   // const [currBottom, chooseBottom] = useState('');
@@ -50,7 +44,7 @@ const FitCheck = ({ userId, setUserId }) => {
         setWeather(currTemp);
       })
       .catch((err) => console.log(err));
-  }
+    }
 
   getCurrWeather();
 
@@ -89,6 +83,7 @@ const FitCheck = ({ userId, setUserId }) => {
         }
       );
     }
+  };
 
     // GETTING GEO-LOCATION VIA API
     const getUserLocationFromAPI = async () => {
@@ -178,9 +173,9 @@ const FitCheck = ({ userId, setUserId }) => {
         <div className='geo-location'>
           <p>Your coordinates are: {[lat, long]}</p>
         </div>
-      </div>
-    );
-  };
+      {/* </div> */}
+     {/* ); */}
+   {/* }; */}
         {topsArr.length && bottomsArr.length ? (
           <p>
             Your outfit for today is your{' '}
@@ -189,10 +184,7 @@ const FitCheck = ({ userId, setUserId }) => {
           </p>
         ) : null}
         {/* {bottomsArr.length ? (<p> and your {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}</p>) : null} */}
-        <button
-          className="btnYolo"
-          onClick={onSubmit}
-        >
+        <button className="btnYolo" onClick={onSubmit}>
           Get It!
         </button>
 
@@ -203,7 +195,7 @@ const FitCheck = ({ userId, setUserId }) => {
       </div>
     );
   };
-};
+// };
 
 // [top1, top2, top3][(bottom1, bottom2, bottom3)];
 

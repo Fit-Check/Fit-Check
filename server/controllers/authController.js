@@ -52,21 +52,21 @@ authController.createUser = (req, res, next) => {
 authController.deleteUser = (req, res, next) => {};
 
 authController.encryptPasswordAndSaveNewUser = async (req, res, next) => {
-  try {
-    const { firstname, lastname, username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await saveNewUser([
-      firstname,
-      lastname,
-      username.toLowerCase(), //sanitize
-      email.toLowerCase(), //sanitize,
-      hashedPassword,
-    ]);
-    res.locals.newlyCreatedUser = newUser;
-    return next();
-  } catch (error) {
-    console.log(error, 'encryptUserPassword');
-  }
+//   try {
+//     const { firstname, lastname, username, email, password } = req.body;
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const newUser = await saveNewUser([
+//       firstname,
+//       lastname,
+//       username.toLowerCase(), //sanitize
+//       email.toLowerCase(), //sanitize,
+//       hashedPassword,
+//     ]);
+//     res.locals.newlyCreatedUser = newUser;
+//     return next();
+//   } catch (error) {
+//     console.log(error, 'encryptUserPassword');
+//   }
 };
 
 // export authController
@@ -137,11 +137,13 @@ module.exports = authController;
 //     console.log(error, 'confirmUser');
 //   }
 // };
-const db = require('../models/clothingModels');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
-const authController = {};
+///*****Duplicated??? 
+// const db = require('../models/clothingModels');
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
+
+// const authController = {};
 
 // login controller
 authController.verifyUserInput = (req, res, next) => {
