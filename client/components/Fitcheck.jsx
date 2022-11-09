@@ -9,12 +9,13 @@ const FitCheck = ({ userId, setUserId }) => {
   const { user_id } = useParams();
   const [token, setToken] = useState('');
   const [weather, setWeather] = useState('');
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
 
   const geolocationAPI = navigator.geolocation;
   const locationURL = process.env.REACT_APP_BASE_URL;
   const locationKey = process.env.REACT_APP_API_KEY;
+
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
 
   // const [currTop, chooseTop] = useState('');
   // const [currBottom, chooseBottom] = useState('');
@@ -23,6 +24,7 @@ const FitCheck = ({ userId, setUserId }) => {
   }, []);
 
   // GETTING WEATHER API
+  // geolocation api calls here for latitude and longitude which can be given as variables to below weather api call
   function getCurrWeather() {
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?lat=30.49&lon=-92.41&appid=51bc9ba3a9de3e5aa5c7dc601894c699'
@@ -42,7 +44,7 @@ const FitCheck = ({ userId, setUserId }) => {
         setWeather(currTemp);
       })
       .catch((err) => console.log(err));
-  }
+    }
 
   getCurrWeather();
 
@@ -81,6 +83,7 @@ const FitCheck = ({ userId, setUserId }) => {
         }
       );
     }
+  };
 
     // GETTING GEO-LOCATION VIA API
     const getUserLocationFromAPI = async () => {
@@ -100,6 +103,41 @@ const FitCheck = ({ userId, setUserId }) => {
       <div id='fitcheck'>
         {weather ? <h2>Today, the weather is {weather}° F!</h2> : null}
         {/* <h2>What is the weather like today?</h2>
+  // GETTING GEO-LOCATION VIA IN BROWSER
+  const getUserCoordinates = () => {
+    if (!geolocationAPI) {
+      console.log('Geolocation API is not available in your browser!');
+    } else {
+      geolocationAPI.getCurrentPosition(
+        (position) => {
+          const { coords } = position;
+          setLat(coords.latitude);
+          setLong(coords.longitude);
+        },
+        (error) => {
+          console.log(`Something went wrong getting your position! : ${error}`);
+        }
+      );
+    }
+
+    // GETTING GEO-LOCATION VIA API
+    const getUserLocationFromAPI = async () => {
+      try {
+        const response = await axios.get(locationURL, {
+          location_key: locationKey,
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(
+          `Something went wrong getting Geolocation from API! : ${error}`
+        );
+      }
+    };
+
+    return (
+      <div id="fitcheck">
+        {weather ? <h2>Today, the weather is {weather}° F!</h2> : null}
+        {/* <h2>What is the weather like today?</h2>
       <form className='todayWeather-form'>
         <label htmlFor='weatherOptions'></label>
         <select
@@ -114,6 +152,8 @@ const FitCheck = ({ userId, setUserId }) => {
           <option value='Hot'>Hot</option>
         </select>
       </form> */}
+        {/* make the below into a new component that will be rendered on change */}
+        {/* <h2 className=''>Your outfit for the day!</h2> */}
         {/* make the below into a new component that will be rendered on change */}
         {/* <h2 className=''>Your outfit for the day!</h2> */}
 
@@ -133,10 +173,29 @@ const FitCheck = ({ userId, setUserId }) => {
         <div className='geo-location'>
           <p>Your coordinates are: {[lat, long]}</p>
         </div>
+      {/* </div> */}
+     {/* ); */}
+   {/* }; */}
+        {topsArr.length && bottomsArr.length ? (
+          <p>
+            Your outfit for today is your{' '}
+            {topsArr[Math.floor(Math.random() * topsArr.length)].name} and{' '}
+            {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}!
+          </p>
+        ) : null}
+        {/* {bottomsArr.length ? (<p> and your {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}</p>) : null} */}
+        <button className="btnYolo" onClick={onSubmit}>
+          Get It!
+        </button>
+
+        {/* LOCATION CHECK*/}
+        <div className="geo-location">
+          <p>Your coordinates are: {[lat, long]}</p>
+        </div>
       </div>
     );
   };
-};
+// };
 
 // [top1, top2, top3][(bottom1, bottom2, bottom3)];
 
