@@ -7,9 +7,6 @@ const authRouter = require('./routes/authRoutes');
 
 
 
-
-
-
 // handle parsing request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
