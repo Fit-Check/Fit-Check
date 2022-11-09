@@ -12,15 +12,28 @@ export default function Dashboard() {
   // need to use JSON.parse before local storage to render local storage token correnctly
   useEffect(() => {
     setToken(JSON.parse(localStorage.getItem('token')));
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(''); 
+  //set cookies/session
+  const [cookies, setCookies] = useState({});
+
+  //post request to backend? 
+  //setCookie/session
+
+  useEffect(() => {
+ 
+    
+    setToken(localStorage.getItem('token'));
   }, []);
 
   console.log(user_id);
   return (
-    <>
+    <div>
       <div className='optionContainer'>
         <div className='fitCheckContainer'>
           <Link to='/fitCheck'>
-            <button className='btnGoFit'>Go to Fitcheck</button>
+            <button className='btnGoFit'>Go to Fit Check</button>
           </Link>
         </div>
         <Form
@@ -32,6 +45,6 @@ export default function Dashboard() {
       </div>
       <br></br>
       <Wardrobe userId={user_id} token={token} />
-    </>
+    </div>
   );
 }

@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import Clothe from './Clothe.jsx';
+import Clothes from './Clothes.jsx';
+
+//  { log: 'Error caught in verifyToken middleware',
+//    status: 400,
+//    message: { err: 'Invalid token.' }
+//  } error from global error handler
+// -> error located in auth.mjs
 
 const Wardrobe = ({ userId, setUserId, token, setToken }) => {
   const [wardrobe, setWardrobe] = useState([]);
@@ -11,7 +14,7 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
   // on mount (useEffect) send get request to server to obtain all wardrobe data
   console.log(userId, token, 'userID and Token');
   function fetchData() {
-    console.log('inside fetchdata');
+    console.log('inside fetchData');
     fetch(`/clothes/${userId}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +32,7 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
   }
   useEffect(() => {
     console.log('I was triggered');
-    console.log(token, 'useeffect token');
+    console.log(token, 'useEffect token');
     if (token) fetchData();
   }, [token]); // not sure on this
 
@@ -41,7 +44,7 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
   // loop through wardrobe state array
   const clothingArr = [];
   for (let i = 0; i < wardrobe.length; i++) {
-    clothingArr.push(<Clothe clothing={wardrobe[i]} key={i}></Clothe>);
+    clothingArr.push(<Clothes clothing={wardrobe[i]} key={i}></Clothes>);
   }
   return (
     <div className='wardrobeBox'>

@@ -18,7 +18,7 @@ router.get(
 
 // save user's new clothes
 router.post('/:userID', clothingController.saveNewClothes, (req, res) => {
-  return res.status(200).json(res.locals.savedClothe);
+  return res.status(200).json(res.locals.savedClothes);
 });
 
 export default router;

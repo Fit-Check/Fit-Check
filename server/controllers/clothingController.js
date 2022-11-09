@@ -42,7 +42,7 @@ clothingController.getAllClothes = async (req, res, next) => {
   }
 };
 
-// get specific cloth
+// get specific clothes
 ///:weather/:userID
 clothingController.getClothesForWeather = async (req, res, next) => {
   console.log('Trying to get appropriate clothes for the weather!');
@@ -111,9 +111,9 @@ clothingController.saveNewClothes = async (req, res, next) => {
         message: { err: 'Incomplete body properties on request url.' },
       });
     }
-    const clothe = await saveNewClothes([userID, name, weather, clothingType]);
+    const clothes = await saveNewClothes([userID, name, weather, clothingType]);
     // save to locals
-    res.locals.savedClothe = clothe.rows;
+    res.locals.savedClothes = clothes.rows;
     // return next
     return next();
   } catch (error) {
