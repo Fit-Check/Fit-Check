@@ -9,8 +9,9 @@ export default function Dashboard() {
   const [token, setToken] = useState('');
   const [refetch, setRefetch] = useState(false);
 
+  // need to use JSON.parse before local storage to render local storage token correnctly
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
+    setToken(JSON.parse(localStorage.getItem('token')));
   }, []);
 
   console.log(user_id);

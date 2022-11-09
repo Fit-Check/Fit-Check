@@ -39,14 +39,15 @@ const Login = ({ userId, setUserId }) => {
           console.log(response, 'response');
           setUserId(response.id);
           localStorage.setItem('token', response.token);
+          console.log('response.token: ', response.token);
           if (response.token) {
             setAuthorize(true);
           }
           navigate(`/home/${response.id}`);
         });
-    } catch (error) {
-      setError(error.message.err);
-      // window.alert(error.message.err);
+    } catch {
+      // setError(error.message.err);
+      // // window.alert(error.message.err);
       console.log(error.message, 'error from login in');
     }
     // setAuthorize((preState) => {
@@ -66,7 +67,7 @@ const Login = ({ userId, setUserId }) => {
         Login
       </button>
       <span>
-        Don't have an account? <Link to='/signup'>Signup</Link>
+        Dont have an account? <Link to='/signup'>Signup</Link>
       </span>
       {error ? <span>{error}</span> : null}
 
