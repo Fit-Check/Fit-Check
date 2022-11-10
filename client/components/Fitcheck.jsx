@@ -3,20 +3,27 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const FitCheck = ({ userId, setUserId }) => {
+const FitCheck = () => {
   const [topsArr, setTopsArray] = useState([]);
   const [bottomsArr, setBottomsArray] = useState([]);
-  const { user_id } = useParams();
+  // const { user_id } = useParams();
   const [token, setToken] = useState('');
   const [weather, setWeather] = useState('');
 
   const geolocationAPI = navigator.geolocation;
   // need to figure out a way to add process.env to react side [CANNOT HAVE KEYS]
-  const locationURL = process.env.NODE_ENV.REACT_APP_BASE_URL;
-  const locationKey = process.env.NODE_ENV.REACT_APP_API_KEY;
+  const locationURL =
+    'https://ipgeolocation.abstractapi.com/v1/?api_key=c2fcf887bbad4de5b2b93ce2048ad242';
+  const locationKey = 'c2fcf887bbad4de5b2b93ce2048ad242';
+
+  // const locationURL = process.env.REACT_APP_BASE_URL;
+  // const locationKey = process.env.REACT_APP_API_KEY;
 
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
+  const [city, setCity] = useState(null);
+  const [region, setRegion] = useState(null);
+  const [country, setCountry] = useState(null);
 
   const [currTop, chooseTop] = useState('');
   const [currBottom, chooseBottom] = useState('');
@@ -32,7 +39,7 @@ const FitCheck = ({ userId, setUserId }) => {
     )
       .then((data) => data.json())
       .then((data) => {
-        console.log(data.main.temp);
+        console.log('this is data temp', data.main.temp);
         const kelvinTemp = data.main.temp;
         // (298K − 273.15) × 9/5 + 32 = 76.73°F
         //convert to fahrenheit
@@ -55,36 +62,36 @@ const FitCheck = ({ userId, setUserId }) => {
     // send post request to server containing state
 
     console.log(weather);
-    fetch(`/clothes/${weather.toLowerCase()}/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((data) => data.json())
-      .then((result) => {
-        setTopsArray(result.top);
-        setBottomsArray(result.bottom);
-      })
-      .catch((error) => console.log(error, 'error'));
+    // fetch(`/clothes/${weather.toLowerCase()}/${userId}`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((data) => data.json())
+    //   .then((result) => {
+    //     setTopsArray(result.top);
+    //     setBottomsArray(result.bottom);
+    //   })
+    //   .catch((error) => console.log(error, 'error'));
   }
 
   // GETTING GEO-LOCATION VIA IN BROWSER
-  const getUserCoordinates = () => {
-    if (!geolocationAPI) {
-      console.log('Geolocation API is not available in your browser!');
-    } else {
-      geolocationAPI.getCurrentPosition(
-        (position) => {
-          const { coords } = position;
-          setLat(coords.latitude);
-          setLong(coords.longitude);
-        },
-        (error) => {
-          console.log(`Something went wrong getting your position! : ${error}`);
-        }
-      );
-    }
-  };
+  // const getUserCoordinates = () => {
+  //   if (!geolocationAPI) {
+  //     console.log('Geolocation API is not available in your browser!');
+  //   } else {
+  //     geolocationAPI.getCurrentPosition(
+  //       (position) => {
+  //         const { coords } = position;
+  //         setLat(coords.latitude);
+  //         setLong(coords.longitude);
+  //       },
+  //       (error) => {
+  //         console.log(`Something went wrong getting your position! : ${error}`);
+  //       }
+  //     );
+  //   }
+  // };
 
   // GETTING GEO-LOCATION VIA API
   const getUserLocationFromAPI = async () => {
@@ -92,7 +99,21 @@ const FitCheck = ({ userId, setUserId }) => {
       const response = await axios.get(locationURL, {
         location_key: locationKey,
       });
-      console.log(response.data);
+
+      setLat(response.data.latitude);
+      setLong(response.data.longitude);
+      setCity(response.data.city);
+      setRegion(response.data.region_iso_code);
+      setCountry(response.data.country_code);
+
+      // console.log(
+      //   'City:',
+      //   response.data.city,
+      //   'Region:',
+      //   response.data.region_iso_code,
+      //   'Country:',
+      //   response.data.country_code
+      // );
     } catch (error) {
       console.log(
         `Something went wrong getting Geolocation from API! : ${error}`
@@ -131,14 +152,18 @@ const FitCheck = ({ userId, setUserId }) => {
         </p>
       ) : null}
       {/* {bottomsArr.length ? (<p> and your {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}</p>) : null} */}
-      <button className='btnYolo' onClick={onSubmit}>
-        Get It!
-      </button>
 
-      {/* LOCATION CHECK*/}
       <div className='geo-location'>
-        <button onClick={getUserCoordinates}>Location</button>
+        <button className='btnYolo' onClick={onSubmit}>
+          Get It!
+        </button>
+        <button className='btnlocation' onClick={getUserLocationFromAPI}>
+          Location
+        </button>
         <p>Your coordinates are: {[lat, long]}</p>
+        <p>
+          You are located in: {city} {region} {country}
+        </p>
       </div>
     </div>
   );

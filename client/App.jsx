@@ -14,50 +14,51 @@ function App() {
   const [userId, setUserId] = useState('');
 
   return (
-    <div className='mainContainer'>
+    <div>
       <header>
         <img src={logo} alt='' />
       </header>
 
-      <div className='contentContainer'>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Login
-                userId={userId}
-                setUserId={setUserId}
-                token={token}
-                setToken={setToken}
-              />
-            }
-          />
+      <div className='mainContainer'>
+        <div className='contentContainer'>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <Login
+                  userId={userId}
+                  setUserId={setUserId}
+                  token={token}
+                  setToken={setToken}
+                />
+              }
+            />
 
-          <Route
-            path='/signup'
-            element={
-              <SignUp
-                userId={userId}
-                setUserId={setUserId}
-                token={token}
-                setToken={setToken}
-              ></SignUp>
-            }
-          ></Route>
-          <Route path='/home' element={<Dashboard />}></Route>
-          <Route path='/fitCheck' element={<FitCheck />}></Route>
+            <Route
+              path='/signup'
+              element={
+                <SignUp
+                  userId={userId}
+                  setUserId={setUserId}
+                  token={token}
+                  setToken={setToken}
+                ></SignUp>
+              }
+            ></Route>
+            <Route path='/home' element={<Dashboard />}></Route>
+            <Route path='/fitCheck' element={<FitCheck />}></Route>
 
-          {/* <Route
+            {/* <Route
             path='/fitcheck'
             element={<FitCheck userId={userId} token={token} />}
           ></Route> */}
 
-          <Route
-            path='/wardrobe'
-            element={<Wardrobe userId={userId} token={token} />}
-          ></Route>
-        </Routes>
-
+            <Route
+              path='/wardrobe'
+              element={<Wardrobe userId={userId} token={token} />}
+            ></Route>
+          </Routes>
+        </div>
       </div>
     </div>
   );

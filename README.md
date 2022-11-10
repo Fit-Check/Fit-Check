@@ -16,11 +16,9 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#authors">Authors</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -72,19 +70,6 @@ To get a local copy up and running follow these simple example steps. ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ROADMAP -->
-
-## Roadmap
-
-- [ ] Minimum Viable Product Release
-- [ ] Using geo-location in conjunction with weather API
-- [ ] Authorization in the front-end
-- [ ] CRUD functionality
-- [ ] Uploading images to add to the wardrobe
-- [ ] Implementing OAuth
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CONTRIBUTING -->
 
 ## Contributing
@@ -125,16 +110,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Co-authored-by: Karen Shi - [Github](https://github.com/ks1009)
 
 Project Link: [https://github.com/Danger-Noodle-CTRI-12/Fit-Check](https://github.com/Danger-Noodle-CTRI-12/Fit-Check)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- []()
-- []()
-- []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
