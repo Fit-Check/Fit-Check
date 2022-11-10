@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-
 const Login = ({ userId, setUserId }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [authorize, setAuthorize] = useState(false);
+  const [error, setError] = useState('');
+  // const [token, setToken] = useState('');
+
   // custom hook for handling login page inputs
   const loginInputs = {
-    username: '',
-    password: '',
-    email: '',
+    username,
+    password,
+    email,
   };
 
   // use navigate for navigation to login page
@@ -21,6 +27,7 @@ const Login = ({ userId, setUserId }) => {
   const [inputData, setInputData] = useState(loginInputs);
 
   // handleSubmit function for sending our login request to the backend
+
   const handleSubmit = (e) => {
     e.preventDefault();
     (async function userLogin() {
@@ -100,15 +107,4 @@ const Login = ({ userId, setUserId }) => {
     </div>
   );
 };
-
-// {authorize ? <p>authorized</p> : null}
-// {topsArr.length && bottomsArr.length ? (
-//     <p>
-//       Your outfit for today is your{' '}
-//       {topsArr[Math.floor(Math.random() * topsArr.length)].name} and your{' '}
-//       {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}
-//     </p>
-//   ) : null}
-
-//// {authorize ? <Navigate to={`/home/${userId}`} /> : null}
 export default Login;

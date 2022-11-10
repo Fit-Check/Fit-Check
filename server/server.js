@@ -1,15 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const cors = require('cors');
+// const cors = require('cors');
 // const clothingRouter = require('./routes/clothingRoutes');
 const authRouter = require('./routes/authRoutes');
-// const auth = './middleware/auth.mjs';
 
 
 
 // handle parsing request body
-app.use(cors({ origin: true }));
+// app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,6 +17,16 @@ app.use('/', authRouter);
 
 // statically serve everything in the build folder on the route '/build'
 app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get('/', (req,res) => {
+  return res.sendStatus(200).json('this is root');
+});
+app.get('/login', (req,res) => {
+  return res.sendStatus(200).json('this is login');
+});
+app.post('/login', (req,res) => {
+  res.sendStatus(200).json('this is login');
+});
 
 // 404 handlers
 app.use('/*', (req, res) => {
