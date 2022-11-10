@@ -30,7 +30,7 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          console.log('fetch clothes response', response);
           setRefetch(true);
         })
         .catch((error) => {
