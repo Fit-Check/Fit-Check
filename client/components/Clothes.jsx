@@ -1,8 +1,7 @@
 import React from 'react';
 
-
 const Clothes = ({ clothing }) => {
-  const { name, type } = clothing; //<p><strong>Style:</strong> {style}</p>
+  const { name, type } = clothing;
   return (
     <div id='clothingCard'>
       <p>

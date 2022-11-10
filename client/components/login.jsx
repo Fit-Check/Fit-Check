@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@mui/material';
-import { ButtonGroup } from '@mui/material';
-// import { Container } from '@mui/system';
-import Grid from '@mui/material/Grid'; //help center login
-import Box from '@mui/material/Box'; //help center login
+import { Button, ButtonGroup } from '@mui/material';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
@@ -85,13 +82,14 @@ const Login = ({ userId, setUserId }) => {
         justify: 'center',
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
+      <Avatar sx={{ m: 1, bgcolor: 'primary.dark' }}></Avatar>
 
       <form onSubmit={handleSubmit}>
         <Typography component='h1' variant='h6'>
           Username
         </Typography>
         <TextField
+          sx={{ backgroundColor: '#f7f7f7' }}
           margin='normal'
           required
           fullWidth
@@ -111,6 +109,7 @@ const Login = ({ userId, setUserId }) => {
          */}
         <Typography variant='h6'>Password</Typography>
         <TextField
+          sx={{ backgroundColor: '#f7f7f7' }}
           margin='normal'
           required
           fullWidth
@@ -129,6 +128,7 @@ const Login = ({ userId, setUserId }) => {
         />*/}
         <Typography variant='h6'>Email</Typography>
         <TextField
+          sx={{ backgroundColor: '#f7f7f7' }}
           margin='normal'
           required
           fullWidth
@@ -149,7 +149,16 @@ const Login = ({ userId, setUserId }) => {
               type='submit'
               onClick={navigateToHome}
               variant='contained'
-              sx={{ ml: 0.5, mr: 3 }}
+              sx={{
+                ml: 0.5,
+                mr: 3,
+                borderRadius: '20px',
+                boxShadow: 3,
+                border: 3,
+                borderColor: '#ffffff',
+                backgroundColor: '#50C878',
+                color: '#ffffff',
+              }}
             >
               Login
             </Button>
@@ -158,22 +167,23 @@ const Login = ({ userId, setUserId }) => {
               variant='contained'
               href='/signup'
               justify='center'
-              // sx={{ ml: 5, mr: 3 }}
+              sx={{
+                borderRadius: '20px',
+                boxShadow: 3,
+                border: 3,
+                borderColor: '#ffffff',
+                backgroundColor: '#FF5733',
+                color: '#ffffff',
+              }}
             >
               Sign Up
               {/* <Link to='/signup'>Signup</Link> */}
             </Button>
           </ButtonGroup>
-          {/* <p className='no-account'>Dont have an account?</p> */}
         </div>
       </form>
     </Box>
   );
 };
 
-//   // <input
-//   type='text'
-//   // placeholder='email'
-
-// />
 export default Login;

@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Form from './Form.jsx';
 import Wardrobe from './Wardrobe.jsx';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { ButtonGroup } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
-// import Grid from '@mui/material/Grid'; //help center login
 import Box from '@mui/material/Box';
-// import Typography from '@mui/material/Typography';
-// import Avatar from '@mui/material/Avatar';
-// import TextField from '@mui/material/TextField';
 
 export default function Dashboard() {
   const { user_id } = useParams();
@@ -36,34 +31,41 @@ export default function Dashboard() {
       sx={{
         ml: 4,
         mr: 4,
-        // display: 'flex',
-        // flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         justify: 'center',
       }}
     >
       <div className='optionContainer'>
-        <div className='fitCheckContainer'>
+        <Typography component='h1' variant='h5' sx={{ mt: 10 }}>
+          What is your new fit?
           <Button
-            className='btnGoFit'
             type='submit'
             variant='contained'
             href='/fitCheck'
-            sx={{ mt: 10, ml: 16 }}
+            sx={{
+              mt: 1,
+              mb: 2,
+              ml: 11,
+              borderRadius: '25px',
+              boxShadow: 3,
+              border: 3,
+              borderColor: '#ffffff',
+              backgroundColor: '#FF5733',
+              color: '#ffffff',
+            }}
           >
             Fit Check
           </Button>
-        </div>
+        </Typography>
         <Form
           userId={user_id}
           token={token}
           refetch={refetch}
           setRefetch={setRefetch}
         />
+        <Wardrobe userId={user_id} token={token} />
       </div>
-      <br></br>
-      <Wardrobe userId={user_id} token={token} />
     </Box>
   );
 }
