@@ -69,7 +69,6 @@
 
 // export default SignUp;
 
-
 import React from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -85,21 +84,22 @@ function SignUp() {
   const [authorize, setAuthorize] = useState(false);
   const navigate = useNavigate('');
 
-
   const onSubmit = async (e) => {
-    e.preventDefault()
-    try{
-      await authServices.signup(username, password,firstname,lastname,email, location).then(
-        (response) => {
-          // check for token and user already exists with 200
-          //   console.log("Sign up successfully", response);
-          navigate('/home');
-          window.location.reload();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    e.preventDefault();
+    try {
+      await authServices
+        .signup(username, password, firstname, lastname, email, location)
+        .then(
+          (response) => {
+            // check for token and user already exists with 200
+            //   console.log("Sign up successfully", response);
+            navigate('/home');
+            window.location.reload();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     } catch (err) {
       console.log(err);
     }

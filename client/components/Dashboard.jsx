@@ -11,16 +11,14 @@ export default function Dashboard() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState(''); 
+  const [email, setEmail] = useState('');
   //set cookies/session
   const [cookies, setCookies] = useState({});
 
-  //post request to backend? 
+  //post request to backend?
   //setCookie/session
 
   useEffect(() => {
- 
-    
     setToken(localStorage.getItem('token'));
   }, []);
 
