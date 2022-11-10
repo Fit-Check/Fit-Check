@@ -18,7 +18,6 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('');
   const [authorize, setAuthorize] = useState(false);
   const navigate = useNavigate('');
 
@@ -26,7 +25,7 @@ function SignUp() {
     e.preventDefault();
     try {
       await authServices
-        .signup(username, password, firstname, lastname, email, location)
+        .signup(username, firstname, lastname, password, email)
         .then(
           (response) => {
             // check for token and user already exists with 200
@@ -114,12 +113,12 @@ function SignUp() {
             margin='normal'
             required
             fullWidth
-            id='Firstname'
+            id='Password'
             label='First name'
             name='firstnameSignup'
             autoComplete='First name'
             autoFocus
-            onChange={(e) => setFirstname(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {/*<input type='text' onChange={(e) => setPassword(e.target.value)} />*/}
 
@@ -131,7 +130,7 @@ function SignUp() {
             margin='normal'
             required
             fullWidth
-            id='Firstname'
+            id='email'
             label='Email'
             name='emailSignup'
             autoComplete='Email'
@@ -140,11 +139,11 @@ function SignUp() {
           />
           {/*<input type='text' onChange={(e) => setEmail(e.target.value)} /> */}
 
-          <Typography component='h1' variant='h6'>
+          {/* <Typography component='h1' variant='h6'>
             {' '}
             Location:{' '}
-          </Typography>
-          <TextField
+          </Typography> */}
+          {/* <TextField
             margin='normal'
             required
             fullWidth
@@ -154,7 +153,7 @@ function SignUp() {
             autoComplete='Location'
             autoFocus
             onChange={(e) => setLocation(e.target.value)}
-          />
+          /> */}
           {/* <input type='text' onChange={(e) => setLocation(e.target.value)} />
           <input*/}
           <Button
