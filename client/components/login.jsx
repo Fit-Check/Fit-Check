@@ -20,11 +20,9 @@ const Login = ({ userId, setUserId }) => {
   // use navigate for navigation to login page
   const navigate = useNavigate();
 
-
   const navigateToHome = () => {
     navigate('/home');
   };
-
 
   // hook for storing state based on users login in for inputs
   const [inputData, setInputData] = useState(loginInputs);
@@ -51,12 +49,9 @@ const Login = ({ userId, setUserId }) => {
         alert('login information not valid');
       }
     });
-
   };
 
-
   // handleChange function for changing data state
-
   const handleChange = (e, inputId) => {
     return setInputData((prevState) => ({
       // prevState is all of the login input so spread out before using
@@ -79,34 +74,28 @@ const Login = ({ userId, setUserId }) => {
           type='text'
           placeholder='username'
           onChange={(e) => handleChange(e, 'username')}
-
         />
         <p>Password:</p>
         <input
           type='text'
           placeholder='password'
+          // value={inputData.password}
           onChange={(e) => handleChange(e, 'password')}
-
-      />
-
+        />
         <p>Email:</p>
         <input
-
           type='text'
           placeholder='email'
           onChange={(e) => handleChange(e, 'email')}
-
-
         />
 
+        {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
 
         <div>
           <button
             className='login-button'
             type='submit'
-
             onClick={navigateToHome}
-  
           >
             Login
           </button>
