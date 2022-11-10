@@ -45,10 +45,12 @@ function App() {
             }
           ></Route>
           <Route path='/home' element={<Dashboard />}></Route>
-          <Route
-            path='/fitCheck/'
+          <Route path='/fitCheck' element={<FitCheck />}></Route>
+
+          {/* <Route
+            path='/fitcheck'
             element={<FitCheck userId={userId} token={token} />}
-          ></Route>
+          ></Route> */}
 
           <Route
             path='/wardrobe'
