@@ -48,9 +48,10 @@ authController.createUser = (req, res, next) => {
 	  req.body.password,
 		req.body.email,
 	  ]
+	  console.log(createUserDetails)
 	  db.query(queryString, createUserDetails, (err, result) =>{
 			  if(err) return next(err);
-			  res.locals.newUser = req.body.username;
+			  res.locals.newUser = result[0];
 			  return next();
 			});
     

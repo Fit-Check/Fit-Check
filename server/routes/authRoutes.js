@@ -16,7 +16,8 @@ const router = express.Router();
 //   res.send(200).json('this works');
 // });
 
-router.post('/signup', authController.createUser, authController.encryptPasswordAndSaveNewUser , (req,res) => {
+router.post('/signup', authController.createUser, (req,res) => {
+  console.log('signup response', res.locals);
   res.send(200).json();
 });
 
