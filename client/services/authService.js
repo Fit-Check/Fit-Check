@@ -26,4 +26,4 @@ const authServices = {
     signup,
 }
 
-export default authServices
+export default authServices;

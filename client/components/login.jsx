@@ -29,43 +29,6 @@ const Login = ({ userId, setUserId }) => {
   // hook for storing state based on users login in for inputs
   const [inputData, setInputData] = useState(loginInputs);
 
-  // const handleLogin = (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     fetch('/login', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         username,
-  //         password,
-  //         email,
-  //       }),
-  //     })
-  //       .then((response) => {
-  //         return response.json();
-  //       })
-  //       .then((response) => {
-  //         console.log('this is username and password', username, password);
-  //         console.log(response, 'response');
-  //         setUserId(response.id);
-  //         localStorage.setItem('token', response.token);
-  //         if (response.token) {
-  //           setAuthorize(true);
-  //         }
-  //         navigate(`/home/${response.id}`);
-  //       });
-  //   } catch (error) {
-  //     setError(error.message.err);
-  //     // window.alert(error.message.err);
-  //     console.log(error.message, 'error from login in');
-  //   }
-  //   // setAuthorize((preState) => {
-  //   //   return !preState;
-  //   // });
-  // };
-
   // handleSubmit function for sending our login request to the backend
 
   const handleSubmit = (e) => {
@@ -91,12 +54,6 @@ const Login = ({ userId, setUserId }) => {
 
   };
 
-  // const handleHome = (e) => {
-  //   e.preventDefault();
-  //   if (authorize) {
-  //     navigate(`/home/${userId}`);
-  //   }
-  // };
 
   // handleChange function for changing data state
 
@@ -122,18 +79,14 @@ const Login = ({ userId, setUserId }) => {
           type='text'
           placeholder='username'
           onChange={(e) => handleChange(e, 'username')}
-          // value={inputData.username}
-          // onChange={(e) => handleChange(e.target.value, 'username')}
-          // onChange={(e) => setUsername(e.target.value)}
+
         />
         <p>Password:</p>
         <input
           type='text'
           placeholder='password'
-          // value={inputData.password}
           onChange={(e) => handleChange(e, 'password')}
-          // onChange={(e) => handleChange(e.target.value, 'password')}
-          // onChange={(e) => setPassword(e.target.value)}
+
       />
 
         <p>Email:</p>
@@ -142,13 +95,10 @@ const Login = ({ userId, setUserId }) => {
           type='text'
           placeholder='email'
           onChange={(e) => handleChange(e, 'email')}
-          // value={inputData.email}
-          // onChange={(e) => handleChange(e.target.value, 'email')}
-          // onChange={(e) => setEmail(e.target.value)}
+
 
         />
 
-        {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
 
         <div>
           <button
@@ -156,7 +106,7 @@ const Login = ({ userId, setUserId }) => {
             type='submit'
 
             onClick={navigateToHome}
-            // onClick={(e) => handleSubmit(e)}
+  
           >
             Login
           </button>
