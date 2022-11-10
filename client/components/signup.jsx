@@ -73,6 +73,7 @@ import React from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import authServices from '../services/authService';
+import axios from 'axios';
 
 function SignUp() {
   const [firstname, setFirstname] = useState('');
@@ -107,7 +108,7 @@ function SignUp() {
 
   return (
     <div id='SignUp'>
-      <form>
+      <form onSubmit={onSubmit}>
         <p>First Name:</p>
         <input type='text' onChange={(e) => setFirstname(e.target.value)} />
         <p>Last Name:</p>
@@ -126,12 +127,12 @@ function SignUp() {
           value='Sign Up'
           onClick={onSubmit}
         ></input>
-      </form>
-      {authorize ? <Navigate to='/home' /> : null}
+       </form>
+       
     </div>
   );
 }
-
+// {authorize ? <Navigate to='/home' /> : null}
 // const { firstname, lastname, username, email, password, location } = req.body;
 
 export default SignUp;
