@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import Typography from '@mui/material/Typography';
 
 const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
   const [name, setName] = useState('');
@@ -40,7 +41,9 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
 
   return (
     <div id='form'>
-      <h2>What is your new fit?</h2>
+      <Typography component='h1' variant='h6'>
+        What is your new fit?
+      </Typography>
       <form>
         <label className='formQuestion'>Describe your new piece:</label>
         <input
