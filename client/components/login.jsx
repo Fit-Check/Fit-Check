@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { Button } from '@mui/material';
+import { ButtonGroup } from '@mui/material';
+// import { Container } from '@mui/system';
+import Grid from '@mui/material/Grid'; //help center login
+import Box from '@mui/material/Box'; //help center login
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import TextField from '@mui/material/TextField';
 
 const Login = ({ userId, setUserId }) => {
   const [username, setUsername] = useState('');
@@ -66,46 +74,106 @@ const Login = ({ userId, setUserId }) => {
   }, []);
 
   return (
-    <div id='login'>
-      <form onSubmit={handleSubmit}>
-        <p>Username:</p>
+    <Box
+      component='form'
+      sx={{
+        mt: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        justify: 'center',
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
 
-        <input
-          type='text'
-          placeholder='username'
+      <form onSubmit={handleSubmit}>
+        <Typography component='h1' variant='h6'>
+          Username
+        </Typography>
+        <TextField
+          margin='normal'
+          required
+          fullWidth
+          id='Username'
+          label='Username'
+          name='Username'
+          autoComplete='Username'
+          autoFocus
           onChange={(e) => handleChange(e, 'username')}
         />
-        <p>Password:</p>
-        <input
+        {/*
+         <input
+          type='text'
+          placeholder='username'
+          
+        />
+         */}
+        <Typography variant='h6'>Password</Typography>
+        <TextField
+          margin='normal'
+          required
+          fullWidth
+          id='Password'
+          label='Password'
+          name='Password'
+          autoComplete='Password'
+          autoFocus
+          onChange={(e) => handleChange(e, 'password')}
+        />
+        {/*<input
           type='text'
           placeholder='password'
           // value={inputData.password}
-          onChange={(e) => handleChange(e, 'password')}
-        />
-        <p>Email:</p>
-        <input
-          type='text'
-          placeholder='email'
+         
+        />*/}
+        <Typography variant='h6'>Email</Typography>
+        <TextField
+          margin='normal'
+          required
+          fullWidth
+          id='Email'
+          label='Email'
+          name='Email'
+          autoComplete='Email'
+          autoFocus
           onChange={(e) => handleChange(e, 'email')}
         />
 
         {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
 
         <div>
-          <button
-            className='login-button'
-            type='submit'
-            onClick={navigateToHome}
-          >
-            Login
-          </button>
-          <button className='sign-up-button'>
-            <Link to='/signup'>Signup</Link>
-          </button>
-          <p className='no-account'>Dont have an account?</p>
+          <ButtonGroup size='medium' sx={{ mt: 2 }}>
+            <Button
+              className='login-button'
+              type='submit'
+              onClick={navigateToHome}
+              variant='contained'
+              sx={{ ml: 0.5, mr: 3 }}
+            >
+              Login
+            </Button>
+            <Button
+              className='sign-up-button'
+              variant='contained'
+              href='/signup'
+              justify='center'
+              // sx={{ ml: 5, mr: 3 }}
+            >
+              Sign Up
+              {/* <Link to='/signup'>Signup</Link> */}
+            </Button>
+          </ButtonGroup>
+          {/* <p className='no-account'>Dont have an account?</p> */}
         </div>
       </form>
-    </div>
+    </Box>
   );
 };
+
+//   // <input
+//   type='text'
+//   // placeholder='email'
+
+// />
 export default Login;

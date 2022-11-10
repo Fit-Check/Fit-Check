@@ -216,7 +216,7 @@ strong {
 /*------------ Login ------------*/
 
 #login {
-  display: flex;
+  display: flexbox;
   flex-direction: column;
   /* justify-content: center; */
 }

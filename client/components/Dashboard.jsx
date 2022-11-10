@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import Form from './Form.jsx';
 import Wardrobe from './Wardrobe.jsx';
 import { useParams } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { ButtonGroup } from '@mui/material';
+
+// import Grid from '@mui/material/Grid'; //help center login
+import Box from '@mui/material/Box';
+// import Typography from '@mui/material/Typography';
+// import Avatar from '@mui/material/Avatar';
+// import TextField from '@mui/material/TextField';
 
 export default function Dashboard() {
   const { user_id } = useParams();
@@ -24,12 +32,28 @@ export default function Dashboard() {
 
   console.log(user_id);
   return (
-    <div>
+    <Box
+      sx={{
+        ml: 4,
+        mr: 4,
+        // display: 'flex',
+        // flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        justify: 'center',
+      }}
+    >
       <div className='optionContainer'>
         <div className='fitCheckContainer'>
-          <Link to='/fitCheck'>
-            <button className='btnGoFit'>Go to Fit Check</button>
-          </Link>
+          <Button
+            className='btnGoFit'
+            type='submit'
+            variant='contained'
+            href='/fitCheck'
+            sx={{ mt: 10, ml: 16 }}
+          >
+            Fit Check
+          </Button>
         </div>
         <Form
           userId={user_id}
@@ -40,6 +64,6 @@ export default function Dashboard() {
       </div>
       <br></br>
       <Wardrobe userId={user_id} token={token} />
-    </div>
+    </Box>
   );
 }

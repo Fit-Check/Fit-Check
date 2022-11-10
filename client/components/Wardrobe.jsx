@@ -8,6 +8,14 @@ import summertop from '../seasonalClothes/clothingImgs/summertop1.jpg';
 import boots from '../seasonalClothes/clothingImgs/boots.jpg';
 import canadagoose from '../seasonalClothes/clothingImgs/canadagoose.jpg';
 
+import Grid from '@mui/material/Grid'; //help center login
+import Box from '@mui/material/Box'; //help center login
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import { ButtonGroup } from '@mui/material';
+
 //  { log: 'Error caught in verifyToken middleware',
 //    status: 400,
 //    message: { err: 'Invalid token.' }
@@ -19,8 +27,8 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
   const [openSpring, setOpenSpring] = useState(false);
   const [openSummer, setOpenSummer] = useState(false);
   const [openFall, setOpenFall] = useState(false);
-    const [openWinter, setOpenWinter] = useState(false);
- 
+  const [openWinter, setOpenWinter] = useState(false);
+
   // on mount (useEffect) send get request to server to obtain all wardrobe data
   console.log(userId, token, 'userID and Token');
   function fetchData() {
@@ -62,7 +70,7 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
     // setSpring(springClothes);
     setOpenSpring(!openSpring);
   };
-  
+
   const handleSummerClothes = () => {
     console.log('Summer button is working');
     // setSpring(springClothes);
@@ -74,43 +82,53 @@ const Wardrobe = ({ userId, setUserId, token, setToken }) => {
     setOpenFall(!openFall);
   };
 
-
   const handleWinterClothes = () => {
     console.log('Winter button is working');
     // setSpring(springClothes);
     setOpenWinter(!openWinter);
-  }
+  };
   return (
-    <div className='wardrobeBox'>
-      <h2>~ In Your Closet ~</h2>
-      <button type="submit" onClick = {handleSpringClothes}>Spring</button>
-      {openSpring ? (
-        <ul className="springWardrobe">
-            <img src={sweater1}/>
-        </ul>
-      ) :null}
-    
-      <button type="submit" onClick = {handleSummerClothes}>Summer</button>
-      {openSummer ? (
-        <ul className="summerWardrobe">
-            <img src={summertop}/>
-        </ul>
-      ) : null}
-      <button type="submit" onClick = {handleFallClothes}>Fall</button>
-      {openFall ? (
-        <ul className="fallWardrobe">
-            <img src={sweater2}/>
-        </ul>
-      ) : null}
-      <button type="submit" onClick = {handleWinterClothes}>Winter</button>
-      {openWinter ? (
-        <ul className="winterWardrobe">
-            <img src={canadagoose}/>
-            <img src={boots}/>
-        </ul>
-      ) : null}
-      
-    </div>
+    <Box>
+      <div className='wardrobeBox'>
+        <Typography variant='h6'>In Your Closet</Typography>
+        <ButtonGroup variant='contained' sx={{ mt: 1 }}>
+          <Button type='submit' onClick={handleSpringClothes}>
+            Spring
+          </Button>
+          {openSpring ? (
+            <ul className='springWardrobe'>
+              <img src={sweater1} />
+            </ul>
+          ) : null}
+
+          <Button type='submit' onClick={handleSummerClothes}>
+            Summer
+          </Button>
+          {openSummer ? (
+            <ul className='summerWardrobe'>
+              <img src={summertop} />
+            </ul>
+          ) : null}
+          <Button type='submit' onClick={handleFallClothes}>
+            Fall
+          </Button>
+          {openFall ? (
+            <ul className='fallWardrobe'>
+              <img src={sweater2} />
+            </ul>
+          ) : null}
+          <Button type='submit' onClick={handleWinterClothes}>
+            Winter
+          </Button>
+          {openWinter ? (
+            <ul className='winterWardrobe'>
+              <img src={canadagoose} />
+              <img src={boots} />
+            </ul>
+          ) : null}
+        </ButtonGroup>
+      </div>
+    </Box>
   );
 };
 
