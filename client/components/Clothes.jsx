@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Clothes = ({ clothing }) => {
   const { name, type } = clothing; //<p><strong>Style:</strong> {style}</p>
   return (
