@@ -16,8 +16,6 @@
   "dependencies": {
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "^4.5.8",
     "@mui/base": "^5.0.0-alpha.105",
     "@mui/icons-material": "^5.10.9",

@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   background-color: white;
@@ -12,26 +12,26 @@ h2 {
   font-size: 1.75rem;
   font-family: 'Josefin Sans', sans-serif;
   /* text-align: center; */
-  text-shadow: 1px 1px rgb(251, 193, 48);
-}
+/* text-shadow: 1px 1px rgb(251, 193, 48); */
+/* } */
 
-.mainContainer {
+/* .mainContainer {
   margin-top: 15rem;
-}
+} */
 
-button {
+/* button {
   font-size: 0.75rem;
-}
+} */
 
-button:hover {
+/* button:hover {
   color: #023047;
   background-color: rgb(251, 194, 48);
   border: solid #023047;
   box-shadow: 5px 5px 0px 0px rgba(251, 194, 48, 1);
-}
+} */
 
 /*------------ HEADER ------------*/
-header {
+/* header {
   display: flex;
   padding: 0.5rem;
   position: fixed;
@@ -44,11 +44,11 @@ header {
 
 img {
   height: 100px;
-}
+} */
 
 /*------------ Content Container ------------*/
 
-.btnGoFit,
+/* .btnGoFit,
 .btnGoBack {
   position: absolute;
   padding: 0.75rem;
@@ -58,10 +58,10 @@ img {
   border-radius: 20px;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease 0s;
-}
+} */
 
 /*------------ New Piece Form ------------*/
-.optionContainer {
+/* .optionContainer {
   margin: 0 auto;
   padding: 2rem;
   width: 30rem;
@@ -70,29 +70,29 @@ img {
   border: solid #023047;
   border-radius: 15px;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
-}
-
+} */
+/* 
 #form {
   margin-top: 4rem;
   /* text-shadow: 1px 1px rgba(0, 0, 0, 0.56); */
-}
+/* } */
 
-.formQuestion {
+/* .formQuestion {
   display: inline-block;
   margin-bottom: 0.75rem;
   font-size: 1.2rem;
-}
+} */
 
-input {
+/* input {
   margin-left: 1rem;
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   background-color: #8ecae6;
   border: 1px solid #023047;
   border-radius: 5px;
-}
+} */
 
-.submit {
+/* .submit {
   margin: 0 45%;
   padding: 0.5rem;
   width: fit-content;
@@ -102,21 +102,21 @@ input {
   box-shadow: 5px 5px 0px 0px rgba(142, 202, 230, 1);
   border-radius: 20px;
   transition: all 0.3s ease 0s;
-}
+} */
 
-.submit:hover {
+/* .submit:hover {
   /* color: #023047;
   background-color: rgb(142, 202, 230);
   border: solid #023047;
   box-shadow: 5px 5px 0px 0px rgba(142, 202, 230, 1); */
-  color: #023047;
+/* color: #023047;
   background-color: rgb(251, 133, 0);
   border: solid #fbc230;
-  box-shadow: 5px 5px 0px 0px rgba(251, 133, 0, 1);
-}
+  box-shadow: 5px 5px 0px 0px rgba(251, 133, 0, 1); */
+/* } */
 
 /*------------ Today's Fit Check ------------*/
-.fitcheck-container {
+/* .fitcheck-container {
   margin: 0 auto;
   padding: 1rem;
   width: 30rem;
@@ -125,26 +125,26 @@ input {
   border: solid #023047;
   border-radius: 15px;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
-}
+} */
 
-#fitcheck {
+/* #fitcheck {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  margin-top: 2rem;
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.56);
-}
+/* margin-top: 2rem;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.56); */
+/* }  */
 
-select {
+/* select {
   border: 1px solid white;
   border-radius: 8px;
   color: rgb(119, 176, 233);
   background-color: rgb(240, 247, 251);
   padding: 0.3rem;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
+} */
 
-.btnYolo,
+/* .btnYolo,
 .btnlocation {
   width: 100px;
   height: 40px;
@@ -161,18 +161,18 @@ select {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-}
+} */
 
-.btnYolo:hover,
+/* .btnYolo:hover,
 .btnlocation:hover {
   background-color: #e29b58;
   box-shadow: 0px 15px 20px rgba(46, 104, 229, 0.4);
   color: #fff;
   transform: translateY(-7px);
-}
+} */
 
 /*------------ Wardrobe ------------*/
-.wardrobeBox {
+/* .wardrobeBox {
   color: #fbc230;
   background: linear-gradient(
     0deg,
@@ -180,9 +180,9 @@ select {
     rgba(2, 48, 71, 1) 100%
   );
   border-top: solid #023047;
-}
+} */
 
-.wardrobeBox h2 {
+/* .wardrobeBox h2 {
   text-shadow: none;
 }
 
@@ -190,9 +190,9 @@ select {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-}
+} */
 
-#clothingCard {
+/* #clothingCard {
   width: 15rem;
   padding: 1.5rem;
   margin: 15px;
@@ -203,9 +203,9 @@ select {
   border-radius: 5px;
   box-shadow: 2px 2px 5px 0px rgba(251, 193, 48, 0.25);
   transition: all 0.3s ease 0s;
-}
+} */
 
-#clothingCard:hover {
+/* #clothingCard:hover {
   transform: rotate(10deg);
 }
 
@@ -215,26 +215,26 @@ strong {
 
 /*------------ Login ------------*/
 
-#login {
+/* #login {
   display: flexbox;
   flex-direction: column;
   /* justify-content: center; */
-}
+/* }  */
 
-.form-container {
+/* .form-container {
   margin: 0.5rem 0;
-}
+} */
 
-button {
+/* button {
   margin: 1rem 1rem 0 0;
-}
+} */
 
-.sign-up-button a {
+/* .sign-up-button a {
   color: black;
   text-decoration: none;
-}
+} */
 
-.sign-up-button {
+/* .sign-up-button {
   width: 100px;
   height: 40px;
   font-family: 'Roboto', sans-serif;
@@ -250,23 +250,23 @@ button {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-}
+} */
 
-.sign-up-button:hover {
+/* .sign-up-button:hover {
   background-color: #2a94cd;
   box-shadow: 0px 15px 20px rgba(46, 104, 229, 0.4);
   color: #fff;
   transform: translateY(-7px);
-}
+} */
 
-.no-account {
+/* .no-account {
   display: flex;
   justify-content: center;
   font-size: 0.7rem;
   color: gray;
-}
+} */
 
-.login-button {
+/* .login-button {
   width: 100px;
   height: 40px;
   font-family: 'Roboto', sans-serif;
@@ -282,11 +282,11 @@ button {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-}
+} */
 
-.login-button:hover {
+/* .login-button:hover {
   background-color: #2a94cd;
   box-shadow: 0px 15px 20px rgba(46, 104, 229, 0.4);
   color: #fff;
   transform: translateY(-7px);
-}
+}  */

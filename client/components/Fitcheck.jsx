@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
 
 const FitCheck = () => {
   const [topsArr, setTopsArray] = useState([]);
   const [bottomsArr, setBottomsArray] = useState([]);
-  // const { user_id } = useParams();
   const [token, setToken] = useState('');
   const [weather, setWeather] = useState('');
 
@@ -75,45 +79,17 @@ const FitCheck = () => {
     //   .catch((error) => console.log(error, 'error'));
   }
 
-  // GETTING GEO-LOCATION VIA IN BROWSER
-  // const getUserCoordinates = () => {
-  //   if (!geolocationAPI) {
-  //     console.log('Geolocation API is not available in your browser!');
-  //   } else {
-  //     geolocationAPI.getCurrentPosition(
-  //       (position) => {
-  //         const { coords } = position;
-  //         setLat(coords.latitude);
-  //         setLong(coords.longitude);
-  //       },
-  //       (error) => {
-  //         console.log(`Something went wrong getting your position! : ${error}`);
-  //       }
-  //     );
-  //   }
-  // };
-
   // GETTING GEO-LOCATION VIA API
   const getUserLocationFromAPI = async () => {
     try {
       const response = await axios.get(locationURL, {
         location_key: locationKey,
       });
-
       setLat(response.data.latitude);
       setLong(response.data.longitude);
       setCity(response.data.city);
       setRegion(response.data.region_iso_code);
       setCountry(response.data.country_code);
-
-      // console.log(
-      //   'City:',
-      //   response.data.city,
-      //   'Region:',
-      //   response.data.region_iso_code,
-      //   'Country:',
-      //   response.data.country_code
-      // );
     } catch (error) {
       console.log(
         `Something went wrong getting Geolocation from API! : ${error}`
@@ -122,23 +98,44 @@ const FitCheck = () => {
   };
 
   return (
-    <div id='fitcheck'>
+    <Box
+      sx={{
+        mt: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        justify: 'center',
+      }}
+    >
       {weather ? <h2>Today, the weather is {weather}° F!</h2> : null}
-      <h2>What is the weather like today?</h2>
-      <form className='todayWeather-form'>
-        <label htmlFor='weatherOptions'></label>
-        <select
+      <Typography component='h2' sx={{ mb: 1 }}>
+        What is the weather like today?
+      </Typography>
+      <FormControl
+        size='small'
+        sx={{
+          ml: 1,
+          minWidth: 90,
+          backgroundColor: '#f7f7f7',
+        }}
+      >
+        <InputLabel sx={{ fontSize: 14, mt: -0.6, mb: 1 }}>Weather</InputLabel>
+        <Select
           value={weather}
-          name='weatherOptions'
+          name='weather'
           onChange={(e) => setWeather(e.target.value)}
+          autoWidth
+          label='weather'
+          sx={{
+            maxHeight: 30,
+          }}
         >
-          <option value=''></option>
-          <option value='Sunny'>Sunny</option>
-          <option value='Rainy'>Rainy</option>
-          <option value='Cold'>Cold</option>
-          <option value='Hot'>Hot</option>
-        </select>
-      </form>
+          <MenuItem value={'sunny'}>Sunny</MenuItem>
+          <MenuItem value={'rainy'}>Rainy</MenuItem>
+          <MenuItem value={'cold'}>Cold</MenuItem>
+        </Select>
+      </FormControl>
       {/* make the below into a new component that will be rendered on change */}
       {/* <h2 className=''>Your outfit for the day!</h2> */}
       {/* make the below into a new component that will be rendered on change */}
@@ -153,19 +150,30 @@ const FitCheck = () => {
       ) : null}
       {/* {bottomsArr.length ? (<p> and your {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}</p>) : null} */}
 
-      <div className='geo-location'>
-        <button className='btnYolo' onClick={onSubmit}>
-          Get It!
-        </button>
-        <button className='btnlocation' onClick={getUserLocationFromAPI}>
-          Location
-        </button>
-        <p>Your coordinates are: {[lat, long]}</p>
-        <p>
-          You are located in: {city} {region} {country}
-        </p>
-      </div>
-    </div>
+      <Button
+        type='submit'
+        variant='contained'
+        onClick={getUserLocationFromAPI}
+        sx={{
+          borderRadius: '25px',
+          boxShadow: 3,
+          border: 3,
+          borderColor: '#ffffff',
+          backgroundColor: '#FF5733',
+          color: '#ffffff',
+          mt: 2,
+          mb: 2,
+        }}
+      >
+        Get It!
+      </Button>
+      <Typography component='h6' sx={{ textAlign: 'center' }}>
+        Your coordinates are: {[lat, long]}
+      </Typography>
+      <Typography component='h6' sx={{ textAlign: 'center' }}>
+        You are located in: {city} {region} {country}
+      </Typography>
+    </Box>
   );
 };
 
