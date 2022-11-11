@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-const API_URL = '/auth';
-const signup = (firstname, lastname, username, email, password, location) => {
+const API_URL = '/';
+const signup = (  username,
+  firstname,
+  lastname,
+  password,
+  email,) => {
   return axios
-    .post(API_URL + '/signup', {
+    .post(API_URL + 'signup', {
+      username,
       firstname,
       lastname,
-      username,
-      email,
       password,
-      location,
+      email,
     })
     .then((response) => {
       if (response.data.accessToken) {

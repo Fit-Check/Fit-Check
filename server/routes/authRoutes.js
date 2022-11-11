@@ -16,11 +16,12 @@ const router = express.Router();
 //   res.send(200).json('this works');
 // });
 
-router.post('/signup', authController.createUser, authController.encryptPasswordAndSaveNewUser , (req,res) => {
+router.post('/signup', authController.encryptPassword, authController.createUser, (req,res) => {
+  console.log('signup response', res.locals);
   res.send(200).json();
 });
 
-router.post('/home', authController.verifyUserInput, authController.confirmUser,authController.constructSignedJWT,(req, res) => {
+router.post('/home', authController.verifyUserInput, authController.confirmUser, authController.constructSignedJWT,(req, res) => {
   res.sendStatus(200).json();
 });
 

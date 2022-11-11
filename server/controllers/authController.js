@@ -38,20 +38,21 @@ authController.verifyUserInput = (req, res, next) => {
 // 
 // new user creator
 authController.createUser = (req, res, next) => {
-  	// eslint-disable-next-line no-mixed-spaces-and-tabs
-  	const queryString = 'Insert into users(username, password, firstname, lastname, email) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+// eslint-disable-next-line no-mixed-spaces-and-tabs
+  	const queryString = 'Insert into users(username, firstname, lastname, password, email) VALUES ($1, $2, $3, $4, $5) RETURNING *';
 
-	  const createUserDetails = [
-		req.body.username,
-		req.body.firstname,
-		req.body.lastname,
-	  req.body.password,
-		req.body.email,
-	  ]
-	  db.query(queryString, createUserDetails, (err, result) =>{
-			  if(err) return next(err);
-			  res.locals.newUser = req.body.username;
-			  return next();
+	const createUserDetails = [
+		res.locals.newlyCreatedUser.username,
+		res.locals.newlyCreatedUser.firstname,
+		res.locals.newlyCreatedUser.lastname,
+		res.locals.newlyCreatedUser.password,
+		res.locals.newlyCreatedUser.email,
+	];
+	console.log(createUserDetails);
+	db.query(queryString, createUserDetails, (err, result) =>{
+			if(err) return next(err);
+			res.locals.newUser = result[0];
+			return next();
 			});
     
 
@@ -76,22 +77,24 @@ authController.createUser = (req, res, next) => {
 // user deleter, no functionality in front end yet so come back for it
 authController.deleteUser = (req, res, next) => {};
 // let saveNewUser;
-authController.encryptPasswordAndSaveNewUser = async (req, res, next) => {
-	// try {
-	// 	const { firstname, lastname, username, email, password } = req.body;
-	// 	const hashedPassword = await bcrypt.hash(password, 10);
-	// 	const newUser = await saveNewUser([
-	// 		firstname,
-	// 		lastname,
-	// 		username.toLowerCase(), //sanitize
-	// 		email.toLowerCase(), //sanitize,
-	// 		hashedPassword,
-	// 	]);
-	// 	res.locals.newlyCreatedUser = newUser;
-	// 	return next();
-	// } catch (error) {
-	// 	console.log(error, 'encryptUserPassword');
-	// }
+authController.encryptPassword = async (req, res, next) => {
+	try {
+		console.log('encrypt password start', req.body)
+		const { firstname, lastname, username, email, password } = req.body;
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const newUser = {
+			username: username.toLowerCase(), //sanitize
+			firstname,
+			lastname,
+			password: hashedPassword,
+			email: email.toLowerCase() //sanitize,
+		};
+		res.locals.newlyCreatedUser = newUser;
+		console.log('this is res.locals: ', res.locals.newlyCreatedUser);
+		return next();
+	} catch (error) {
+		console.log(error, 'encryptUserPassword');
+	}
 };
 
 // authorization token created with jsonwebtoken

@@ -13,7 +13,6 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('');
   const [authorize, setAuthorize] = useState(false);
   const navigate = useNavigate('');
 
@@ -21,7 +20,7 @@ function SignUp() {
     e.preventDefault();
     try {
       await authServices
-        .signup(username, password, firstname, lastname, email, location)
+        .signup(username, firstname, lastname, password, email)
         .then(
           (response) => {
             // check for token and user already exists with 200
