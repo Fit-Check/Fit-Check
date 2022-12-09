@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import { Button, ButtonGroup } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import TextField from '@mui/material/TextField';
 
 const Login = ({ userId, setUserId }) => {
   const [username, setUsername] = useState('');
@@ -17,70 +14,176 @@ const Login = ({ userId, setUserId }) => {
   const [authorize, setAuthorize] = useState(false);
   const [error, setError] = useState('');
   // const [token, setToken] = useState('');
-  const navigate = useNavigate();
-  const onSubmit = (e) => {
-    try {
-      e.preventDefault();
-      fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-          email,
-        }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          console.log(response, 'response');
-          setUserId(response.id);
-          localStorage.setItem('token', response.token);
-          if (response.token) {
-            setAuthorize(true);
-          }
-          navigate(`/home/${response.id}`);
-        });
-    } catch (error) {
-      setError(error.message.err);
-      // window.alert(error.message.err);
-      console.log(error.message, 'error from login in');
-    }
-    // setAuthorize((preState) => {
-    //   return !preState;
-    // });
+
+  // custom hook for handling login page inputs
+  const loginInputs = {
+    username,
+    password,
+    email,
   };
 
-  return (
-    <div id='login'>
-      <p>Username:</p>
-      <input type='text' onChange={(e) => setUsername(e.target.value)} />
-      <p>Password:</p>
-      <input type='text' onChange={(e) => setPassword(e.target.value)} />
-      <p>Email:</p>
-      <input type='text' onChange={(e) => setEmail(e.target.value)} />
-      <button type='submit' onClick={(e) => onSubmit(e)}>
-        Login
-      </button>
-      <span>
-        Don't have an account? <Link to='/signup'>Signup</Link>
-      </span>
-      {error ? <span>{error}</span> : null}
+  // use navigate for navigation to login page
+  const navigate = useNavigate();
 
-      {authorize ? <Navigate to={`/home/${userId}`} /> : null}
-    </div>
+  const navigateToHome = () => {
+    navigate('/home');
+  };
+
+  // hook for storing state based on users login in for inputs
+  const [inputData, setInputData] = useState(loginInputs);
+
+  // handleSubmit function for sending our login request to the backend
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    (async function userLogin() {
+      try {
+        await axios
+          .post('/login', inputData)
+          .then((res) => {
+            setInputData(loginInputs);
+            console.log('res.data in login: ', res.data);
+            return res.data;
+          })
+          .then((data) => {
+            localStorage.setItem('username', data.username);
+            localStorage.setItem('user_id', data.user_id);
+            return navigate('/home');
+          });
+      } catch (err) {
+        alert('login information not valid');
+      }
+    });
+  };
+
+  // handleChange function for changing data state
+  const handleChange = (e, inputId) => {
+    return setInputData((prevState) => ({
+      // prevState is all of the login input so spread out before using
+      ...prevState,
+      [inputId]: e.target.value,
+    }));
+  };
+
+  // this useEffect is for storing in localStorage, can comment in later if needed
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
+  return (
+    <Box
+      component='form'
+      sx={{
+        mt: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        justify: 'center',
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: 'primary.dark' }}></Avatar>
+
+      <form onSubmit={handleSubmit}>
+        <Typography component='h1' variant='h6'>
+          Username
+        </Typography>
+        <TextField
+          sx={{ backgroundColor: '#f7f7f7' }}
+          margin='normal'
+          required
+          fullWidth
+          id='Username'
+          label='Username'
+          name='Username'
+          autoComplete='Username'
+          autoFocus
+          onChange={(e) => handleChange(e, 'username')}
+        />
+        {/*
+         <input
+          type='text'
+          placeholder='username'
+          
+        />
+         */}
+        <Typography variant='h6'>Password</Typography>
+        <TextField
+          sx={{ backgroundColor: '#f7f7f7' }}
+          margin='normal'
+          required
+          fullWidth
+          id='Password'
+          label='Password'
+          name='Password'
+          autoComplete='Password'
+          autoFocus
+          onChange={(e) => handleChange(e, 'password')}
+        />
+        {/*<input
+          type='text'
+          placeholder='password'
+          // value={inputData.password}
+         
+        />*/}
+        <Typography variant='h6'>Email</Typography>
+        <TextField
+          sx={{ backgroundColor: '#f7f7f7' }}
+          margin='normal'
+          required
+          fullWidth
+          id='Email'
+          label='Email'
+          name='Email'
+          autoComplete='Email'
+          autoFocus
+          onChange={(e) => handleChange(e, 'email')}
+        />
+
+        {/* <button Home type='submit' onClick={(e) => handleLogin(e) && handleDashboard(e)} > */}
+
+        <div>
+          <ButtonGroup size='medium' sx={{ mt: 2 }}>
+            <Button
+              className='login-button'
+              type='submit'
+              onClick={navigateToHome}
+              variant='contained'
+              sx={{
+                ml: 0.5,
+                mr: 3,
+                borderRadius: '20px',
+                boxShadow: 3,
+                border: 3,
+                borderColor: '#ffffff',
+                backgroundColor: '#50C878',
+                color: '#ffffff',
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              className='sign-up-button'
+              variant='contained'
+              href='/signup'
+              justify='center'
+              sx={{
+                borderRadius: '20px',
+                boxShadow: 3,
+                border: 3,
+                borderColor: '#ffffff',
+                backgroundColor: '#FF5733',
+                color: '#ffffff',
+              }}
+            >
+              Sign Up
+              {/* <Link to='/signup'>Signup</Link> */}
+            </Button>
+          </ButtonGroup>
+        </div>
+      </form>
+    </Box>
   );
 };
 
-// {authorize ? <p>authorized</p> : null}
-// {topsArr.length && bottomsArr.length ? (
-//     <p>
-//       Your outfit for today is your{' '}
-//       {topsArr[Math.floor(Math.random() * topsArr.length)].name} and your{' '}
-//       {bottomsArr[Math.floor(Math.random() * bottomsArr.length)].name}
-//     </p>
-//   ) : null}
 export default Login;

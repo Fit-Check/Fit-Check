@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Input from '@mui/material/Input';
+import Box from '@mui/material/Box';
 
 const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
   const [name, setName] = useState('');
@@ -31,7 +35,7 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          console.log('fetch clothes response', response);
           setRefetch(true);
         })
         .catch((error) => {
@@ -41,19 +45,24 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
   }
 
   return (
-    <div id='form'>
-      <h2>What is your new fit?</h2>
-      <form>
-        <label className='formQuestion'>Describe your new piece:</label>
-        <input
+    <Box>
+      <Typography component='h6' sx={{ mb: 1 }}>
+        Describe your new piece:
+        <Input
           type='text'
           value={name}
           minLength='1'
           size='20'
-          placeholder='bell bottom jeans'
+          placeholder='apple bottom jeans 🍎'
           onChange={(e) => setName(e.target.value)}
-        ></input>
-        <label className='formQuestion'>Do you wear your new piece on</label>
+        ></Input>
+      </Typography>
+
+      <Typography component='h6' sx={{ mb: 1 }}>
+        Is your new piece:
+      </Typography>
+
+      <Typography component='h6' sx={{ mb: 1 }}>
         <input
           type='radio'
           id='top'
@@ -61,7 +70,9 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
           value='Top'
           onClick={() => setType('top')}
         />
-        <label htmlFor='top'>Top</label>
+        Top
+      </Typography>
+      <Typography component='h6' sx={{ mb: 1 }}>
         <input
           type='radio'
           id='bottom'
@@ -69,30 +80,56 @@ const Form = ({ userId, setUserId, token, setToken, setRefetch, refetch }) => {
           value='Bottom'
           onClick={() => setType('bottom')}
         />
-        <label htmlFor='bottom'>Bottom</label>
-        <label className='formQuestion'>
-          What is the weather like when you wear this?
-        </label>
-        <select
-          value={weather}
-          name='weather'
-          onChange={(e) => setWeather(e.target.value)}
+        Bottom
+      </Typography>
+      <Typography component='h6' sx={{ mb: 1 }}>
+        What is the weather like when you wear this?
+        <FormControl
+          size='small'
+          sx={{
+            ml: 1,
+            minWidth: 90,
+            backgroundColor: '#f7f7f7',
+          }}
         >
-          <option value=''></option>
-          <option value='hot'>Hot</option>
-          <option value='perfect'>Perfect</option>
-          <option value='cool'>Cool</option>
-          <option value='cold'>Cold</option>
-        </select>
-        <br></br>
-        <input
-          className='submit'
-          type='button'
-          value='Submit'
-          onClick={onSubmit}
-        ></input>
-      </form>
-    </div>
+          <InputLabel sx={{ fontSize: 14, mt: -0.6 }}>Weather</InputLabel>
+          <Select
+            value={weather}
+            name='weather'
+            onChange={(e) => setWeather(e.target.value)}
+            autoWidth
+            label='weather'
+            sx={{
+              maxHeight: 30,
+            }}
+          >
+            <MenuItem value={'hot'}>Hot</MenuItem>
+            <MenuItem value={'perfect'}>Perfect</MenuItem>
+            <MenuItem value={'cool'}>Cool</MenuItem>
+            <MenuItem value={'cold'}>Cold</MenuItem>
+          </Select>
+        </FormControl>
+      </Typography>
+      <Button
+        size='medium'
+        className='submit'
+        type='submit'
+        variant='contained'
+        onClick={onSubmit}
+        sx={{
+          mt: 2,
+          ml: 12,
+          borderRadius: '20px',
+          boxShadow: 3,
+          backgroundColor: '#50C878',
+          color: '#ffffff',
+          border: 3,
+          borderColor: '#ffffff',
+        }}
+      >
+        Submit
+      </Button>
+    </Box>
   );
 };
 
